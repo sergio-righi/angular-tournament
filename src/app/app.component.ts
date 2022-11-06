@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+
+import { UserService, TournamentService } from "./core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  selector: "app-root",
+  templateUrl: "./app.component.html"
 })
-export class AppComponent {
-  title = 'first-app';
+export class AppComponent implements OnInit {
+  constructor(private userService: UserService, private tournamentService: TournamentService) { }
+
+  ngOnInit() {
+    this.userService.populate();
+  }
 }

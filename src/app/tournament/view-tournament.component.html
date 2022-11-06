@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="mt-2">{{ viewTournamentForm.name }}</h2>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="''">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ viewTournamentForm.name }}
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-sm-12">
+      <app-bracket
+        [readonly]="isReadOnly"
+        [rounds]="viewTournamentForm.rounds"
+        [participants]="viewTournamentForm.participants"
+      ></app-bracket>
+    </div>
+  </div>
+</div>
