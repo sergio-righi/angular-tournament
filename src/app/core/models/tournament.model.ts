@@ -10,5 +10,6 @@ export interface Tournament {
   createdBy: string;
   createdAt?: number;
   startDate?: number;
+  completed: boolean;
   deleted: boolean;
 }

@@ -28,7 +28,7 @@ export class ManageTournamentComponent implements OnInit {
   }
 
   get isReadOnly(): boolean {
-    return this.manageTournamentForm.startDate === undefined || (this.manageTournamentForm.startDate !== undefined && Date.now() <= this.manageTournamentForm.startDate);
+    return this.manageTournamentForm.completed || this.manageTournamentForm.startDate === undefined || (this.manageTournamentForm.startDate !== undefined && Date.now() <= this.manageTournamentForm.startDate);
   }
 
   get isParticipantValid(): boolean {
@@ -119,6 +119,7 @@ export class TournamentForm implements Tournament {
   createdBy: string = "";
   createdAt: number = Date.now();
   startDate?: number;
+  completed: boolean = false;
   deleted: boolean = false;
 
   get startDateString(): string {

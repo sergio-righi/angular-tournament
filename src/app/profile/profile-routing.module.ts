@@ -5,7 +5,7 @@ import { ProfileAuthResolver } from './profile-auth-resolver.service';
 
 const routes: Routes = [
   {
-    path: 'profile',
+    path: '',
     component: ProfileComponent,
     resolve: {
       isAuthenticated: ProfileAuthResolver

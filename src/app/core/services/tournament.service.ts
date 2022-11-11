@@ -166,6 +166,7 @@ export class TournamentService {
       startDate: 1667678559544,
       createdAt: 1667678539544,
       createdBy: "63627d5b1b0ad31a2af90f30",
+      completed: false,
       deleted: false
     }
   ];

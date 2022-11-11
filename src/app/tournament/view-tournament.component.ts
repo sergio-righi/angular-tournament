@@ -26,7 +26,7 @@ export class ViewTournamentComponent implements OnInit {
   }
 
   get isReadOnly(): boolean {
-    return this.viewTournamentForm.startDate === undefined || (this.viewTournamentForm.startDate !== undefined && Date.now() <= this.viewTournamentForm.startDate);
+    return this.viewTournamentForm.completed || this.viewTournamentForm.startDate === undefined || (this.viewTournamentForm.startDate !== undefined && Date.now() <= this.viewTournamentForm.startDate);
   }
 
   findTournament(): void {
@@ -51,5 +51,6 @@ export class TournamentForm implements Tournament {
   createdBy: string = "";
   createdAt: number = Date.now();
   startDate?: number;
+  completed: boolean = false;
   deleted: boolean = false;
 }
