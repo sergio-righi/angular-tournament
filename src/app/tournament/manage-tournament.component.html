@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h2 class="mt-2">
+      <h3 class="mt-2">
         {{ tournamentId ? "Edit Tournament" : "Add Tournament" }}
-      </h2>
+      </h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
@@ -25,6 +25,7 @@
               class="form-control"
               id="name"
               required
+              placeholder="e.g. tournament X, knockout Y"
               [(ngModel)]="manageTournamentForm.name"
               name="name"
               #name="ngModel"
@@ -41,6 +42,7 @@
             <textarea
               class="form-control"
               id="description"
+              placeholder="e.g. it is a soccer competition where the players confront each other only once."
               [(ngModel)]="manageTournamentForm.description"
               name="description"
               #description="ngModel"
@@ -75,6 +77,7 @@
                 <input
                   type="text"
                   class="form-control"
+                  placeholder="e.g. Peeter, Richard, Behnaz, Lucas"
                   (blur)="saveParticipant(i, $event)"
                   [value]="participant.name"
                 />
@@ -84,7 +87,7 @@
                   (click)="removeParticipant(i)"
                   class="btn btn-danger"
                 >
-                  Remove
+                  <i class="fas fa-trash"></i>
                 </button>
               </div>
             </div>
@@ -109,6 +112,7 @@
               id="startDate"
               name="startDate"
               required
+              placeholder="e.g. mm/dd/yyyy"
               [(ngModel)]="manageTournamentForm.startDateString"
               startDate="startDate"
               #startDate="ngModel"
@@ -133,6 +137,21 @@
               #deleted="ngModel"
             />
             <label class="form-check-label" for="deleted"> Hidden </label>
+          </div>
+        </div>
+        <br />
+        <div class="col-sm-12">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              id="deleted"
+              name="completed"
+              class="form-check-input"
+              [(ngModel)]="manageTournamentForm.completed"
+              completed="completed"
+              #completed="ngModel"
+            />
+            <label class="form-check-label" for="completed"> Completed </label>
           </div>
         </div>
         <button

@@ -11,15 +11,20 @@ import { UserService } from '../core/services';
 })
 export class RegisterComponent implements OnInit {
   isSubmitted: boolean = false;
-  manageProfileForm: RegisterForm = new RegisterForm();
+  isPasswordVisible: boolean = false;
+  manageUserForm: RegisterForm = new RegisterForm();
 
   @ViewChild("RegisterForm")
-  profileForm!: NgForm;
+  userForm!: NgForm;
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  get passwordType(): string {
+    return this.isPasswordVisible ? 'text' : 'password';
+  }
 
   saveUser(isValid: boolean) {
     this.isSubmitted = true;
@@ -27,10 +32,15 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['']);
     }
   }
+
+  togglePassword() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
 }
 
 export class RegisterForm implements User {
   id: string = "";
+  name: string = "";
   email: string = "";
   token: string = "";
   username: string = "";

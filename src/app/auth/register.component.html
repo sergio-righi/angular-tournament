@@ -1,53 +1,90 @@
-<div id="login">
-    <div class="login-container">
-        <div class="login-header">
-            <img class="brand" src="/lazy-company-logo.svg" />
-        </div>
-
-        <div class="login-content">
-            <form>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group mb-2">
-                            <label for="username" class="form-label"> Username </label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group mb-2">
-                            <label for="email" class="form-label"> Email </label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group mb-2">
-                            <label for="password" class="form-label"> Password </label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary">
-                           Sign Up
-                        </button>
-                    </div>
-                    <span class="footnote">
-                        Already has an account?
-                        <button class="btn btn-primary" >
-                            Sign in
-                        </button>
-                    </span>
-                </div>
-            </form>
-        </div>
-
-        <div class="login-footer">
-            <div class="message">
-                Sign in
-                <a href="#" muted>Terms of Service</a>,
-                <a href="#" muted>Privacy Policy</a>
-                and
-                <a href="#" muted>Cookie Policy</a>
-            </div>
-        </div>
+<section class="section-auth">
+  <div class="auth-container">
+    <div class="brand">
+      <a [routerLink]="['']">
+        <img src="/assets/images/BLPRS.svg" />
+      </a>
     </div>
-</div>
+
+    <div class="form">
+      <form #tournamentForm="ngForm">
+        <div class="form-group mb-2">
+          <label for="name" class="form-label"> Name </label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+            placeholder="e.g. Behnaz, Peeter"
+            [(ngModel)]="manageUserForm.name"
+            name="name"
+            #name="ngModel"
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="email" class="form-label"> Email </label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+            placeholder="e.g. behnaz@gmail.com"
+            [(ngModel)]="manageUserForm.email"
+            email="email"
+            #email="ngModel"
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="username" class="form-label"> Username </label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            required
+            placeholder="e.g. lucas1, richard3"
+            [(ngModel)]="manageUserForm.username"
+            username="username"
+            #username="ngModel"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label"> Password </label>
+          <div class="input-group mb-3">
+            <input
+              [type]="passwordType"
+              class="form-control"
+              id="password"
+              name="password"
+              required
+              placeholder="e.g. abDe12%3"
+              [(ngModel)]="manageUserForm.password"
+              password="password"
+              #password="ngModel"
+            />
+            <span class="input-group-text" (click)="togglePassword()">
+              <i
+                class="fas"
+                [class.fa-eye]="!isPasswordVisible"
+                [class.fa-eye-slash]="isPasswordVisible"
+              ></i>
+            </span>
+          </div>
+        </div>
+        <button class="btn btn-primary" (click)="saveUser(userForm.form.valid)">
+          Sign Up
+        </button>
+      </form>
+      <div class="footnote">
+        <span>Already have an account?</span>
+        <a [routerLink]="['/auth', 'login']">Sign In</a>
+      </div>
+    </div>
+
+    <div class="illustration">
+      <img src="/assets/images/signup_illustration.svg" />
+    </div>
+  </div>
+</section>

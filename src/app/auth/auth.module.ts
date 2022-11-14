@@ -2,6 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AuthComponent } from './auth.component';
+import { RegisterComponent } from './register.component';
 import { NoAuthGuard } from './no-auth-guard.service';
 import { SharedModule } from '../shared';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -12,10 +13,11 @@ import { AuthRoutingModule } from './auth-routing.module';
     AuthRoutingModule
   ],
   declarations: [
-    AuthComponent
+    AuthComponent,
+    RegisterComponent,
   ],
   providers: [
     NoAuthGuard
   ]
 })
-export class AuthModule {}
+export class AuthModule { }

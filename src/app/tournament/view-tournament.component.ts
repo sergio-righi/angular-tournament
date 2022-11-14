@@ -40,6 +40,10 @@ export class ViewTournamentComponent implements OnInit {
       this.viewTournamentForm.createdBy = tournament.createdBy;
     }
   }
+
+  setCompleted(isCompleted: boolean) {
+    this.viewTournamentForm.completed = isCompleted;
+  }
 }
 
 export class TournamentForm implements Tournament {

@@ -10,9 +10,10 @@ import { Errors, UserService } from '../core';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
+  isPasswordVisible: boolean = false;
   authType: String = '';
   title: String = '';
-  errors: Errors = {errors: {}};
+  errors: Errors = { errors: {} };
   isSubmitting = false;
   authForm: FormGroup;
 
@@ -42,19 +43,27 @@ export class AuthComponent implements OnInit {
     });
   }
 
+  get passwordType(): string {
+    return this.isPasswordVisible ? 'text' : 'password';
+  }
+
   submitForm() {
     this.isSubmitting = true;
-    this.errors = {errors: {}};
+    this.errors = { errors: {} };
 
     const credentials = this.authForm.value;
     this.userService
-    .attemptAuth(this.authType, credentials)
-    .subscribe(
-      data => this.router.navigateByUrl('/'),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
-      }
-    );
+      .attemptAuth(this.authType, credentials)
+      .subscribe(
+        data => this.router.navigateByUrl('/'),
+        err => {
+          this.errors = err;
+          this.isSubmitting = false;
+        }
+      );
+  }
+
+  togglePassword() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 }

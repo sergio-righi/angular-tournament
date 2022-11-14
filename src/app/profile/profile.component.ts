@@ -49,6 +49,7 @@ export class ProfileComponent implements OnInit {
 
 export class ProfileForm implements User {
   id: string = "";
+  name: string = "";
   email: string = "";
   token: string = "";
   username: string = "";
