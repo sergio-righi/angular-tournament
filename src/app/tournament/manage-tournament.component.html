@@ -130,6 +130,20 @@
             <input
               type="checkbox"
               id="deleted"
+              name="completed"
+              class="form-check-input"
+              [(ngModel)]="manageTournamentForm.completed"
+              completed="completed"
+              #completed="ngModel"
+            />
+            <label class="form-check-label" for="completed"> Completed </label>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              id="deleted"
               name="deleted"
               class="form-check-input"
               [(ngModel)]="manageTournamentForm.deleted"
@@ -140,20 +154,6 @@
           </div>
         </div>
         <br />
-        <div class="col-sm-12">
-          <div class="form-check">
-            <input
-              type="checkbox"
-              id="deleted"
-              name="completed"
-              class="form-check-input"
-              [(ngModel)]="manageTournamentForm.completed"
-              completed="completed"
-              #completed="ngModel"
-            />
-            <label class="form-check-label" for="completed"> Completed </label>
-          </div>
-        </div>
         <button
           class="btn btn-primary"
           (click)="saveTournament(tournamentForm.form.valid)"
