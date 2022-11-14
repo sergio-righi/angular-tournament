@@ -8,24 +8,22 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
-import {
-  FooterComponent,
-  HeaderComponent,
-  SharedModule
-} from './shared';
+import { ProfileModule } from './profile/profile.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, HeaderComponent],
+  declarations: [AppComponent],
   imports: [
     NgbModule,
     FormsModule,
     BrowserModule,
     CoreModule,
-    SharedModule,
     HomeModule,
     AuthModule,
+    ProfileModule,
+    LayoutModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule
