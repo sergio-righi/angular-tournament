@@ -6,9 +6,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth.module';
-import { HomeModule } from './home/home.module';
-import { ProfileModule } from './profile/profile.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
@@ -20,9 +17,6 @@ import { LayoutModule } from './layout/layout.module';
     FormsModule,
     BrowserModule,
     CoreModule,
-    HomeModule,
-    AuthModule,
-    ProfileModule,
     LayoutModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
