@@ -2,12 +2,14 @@
 
 .section-auth {
   height: 100%;
+  padding: $default-distance * 2;
   background-color: #1e1e1e !important;
 
   .auth-container {
     top: 50%;
     left: 50%;
-    width: 60%;
+    width: 100%;
+    max-width: 750px;
     position: absolute;
     background-color: #ffffff;
     border-radius: $border-radius;
@@ -24,7 +26,7 @@
     }
 
     & > .form {
-      width: 50%;
+      width: 100%;
 
       & > .greeting {
         font-size: $font-size * 1;
@@ -55,13 +57,31 @@
 
     & > .illustration {
       top: 50%;
+      left: 50%;
       z-index: -1;
       position: absolute;
-      transform: translateY(-50%);
-      right: $default-distance * 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
 
-      & > img {
-        width: 400px;
+@media (min-width: 576px) {
+  .section-auth {
+    padding: 0;
+
+    .auth-container {
+      & > .form {
+        width: 50%;
+      }
+
+      & > .illustration {
+        left: initial;
+        transform: translateY(-50%);
+        right: $default-distance * 1;
+
+        & > img {
+          width: 400px;
+        }
       }
     }
   }
