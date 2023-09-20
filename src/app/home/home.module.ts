@@ -3,8 +3,8 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { HomeAuthResolver } from './home-auth-resolver.service';
-import { SharedModule } from '../shared';
 import { HomeRoutingModule } from './home-routing.module';
+import { SharedModule } from 'app/shared';
 
 @NgModule({
   imports: [
@@ -18,4 +18,4 @@ import { HomeRoutingModule } from './home-routing.module';
     HomeAuthResolver
   ]
 })
-export class HomeModule {}
+export class HomeModule { }

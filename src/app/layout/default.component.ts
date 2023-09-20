@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { UserService, TournamentService } from "../core";
+import { UserService, TournamentService } from "app/core";
 
 @Component({
   selector: "app-layout-default",

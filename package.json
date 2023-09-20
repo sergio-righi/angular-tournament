@@ -1,5 +1,5 @@
 {
-  "name": "first-app",
+  "name": "tournament-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -16,12 +16,10 @@
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
     "@angular/forms": "^14.2.0",
-    "@angular/material": "^14.2.6",
+    "@angular/material": "^16.2.4",
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
-    "@angular/router": "^14.2.0",
-    "@ng-bootstrap/ng-bootstrap": "^13.1.0",
-    "bootstrap": "^5.2.2",
+    "@angular/router": "^14.3.0",
     "bson": "^4.7.0",
     "ngx-toastr": "^15.2.1",
     "rxjs": "~7.5.0",

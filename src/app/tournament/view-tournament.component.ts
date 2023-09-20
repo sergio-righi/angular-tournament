@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Participant, Round, Tournament } from '../core/models';
-import { TournamentService } from '../core';
+import { Participant, Round, Tournament } from 'app/core/models';
+import { TournamentService } from 'app/core';
 
 @Component({
   selector: 'app-view-tournament',

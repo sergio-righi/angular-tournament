@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Participant } from 'src/app/core/models';
+import { Participant } from 'app/core/models';
 
 @Component({
   selector: 'app-bracket',

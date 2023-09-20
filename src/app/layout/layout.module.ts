@@ -6,7 +6,7 @@ import {
   FooterComponent,
   HeaderComponent,
   SharedModule
-} from '../shared';
+} from 'app/shared';
 import { DefaultComponent } from './default.component';
 import { EmptyComponent } from './empty.component';
 

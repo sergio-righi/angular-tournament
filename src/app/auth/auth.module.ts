@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { RegisterComponent } from './register.component';
 import { NoAuthGuard } from './no-auth-guard.service';
-import { SharedModule } from '../shared';
 import { AuthRoutingModule } from './auth-routing.module';
+import { SharedModule } from 'app/shared';
 
 @NgModule({
   imports: [

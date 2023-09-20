@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectID } from 'bson'
-import { Participant, Round, Tournament } from '../core/models';
-import { TournamentService } from '../core/services';
-import { toDateString } from '../core/utils';
+import { Participant, Round, Tournament } from 'app/core/models';
+import { TournamentService } from 'app/core/services';
+import { toDateString } from 'app/core/utils';
 
 @Component({
   selector: 'app-manage-tournament',
