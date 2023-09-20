@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,13 +12,13 @@ import { LayoutModule } from './layout/layout.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    NgbModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     CoreModule,
     LayoutModule,
     AppRoutingModule,
-    FlexLayoutModule,
     BrowserAnimationsModule,
   ],
   providers: [],

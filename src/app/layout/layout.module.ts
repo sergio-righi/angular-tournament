@@ -7,18 +7,16 @@ import {
   HeaderComponent,
   SharedModule
 } from 'app/shared';
-import { MaterialModule } from 'app/material.module';
 import { DefaultComponent } from './default.component';
 import { EmptyComponent } from './empty.component';
 
 @NgModule({
   imports: [
-    MaterialModule,
     CommonModule,
     SharedModule,
     RouterModule
   ],
   declarations: [FooterComponent, HeaderComponent, DefaultComponent, EmptyComponent],
-  exports: [MaterialModule, DefaultComponent, EmptyComponent]
+  exports: [DefaultComponent, EmptyComponent]
 })
 export class LayoutModule { }

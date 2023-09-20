@@ -2,7 +2,7 @@
 @use "assets/styles/colors";
 @use "assets/styles/helpers";
 @use "assets/styles/variables";
-@use "assets/styles/components";
+@import "~bootstrap/dist/css/bootstrap.css";
 
 html,
 body {

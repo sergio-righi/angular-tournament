@@ -1,26 +1,28 @@
-<div>
-  <div>
-    <h3>
-      {{ tournamentId ? "Edit Tournament" : "Add Tournament" }}
-    </h3>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">
-          {{ tournamentId ? "Edit Tournament" : "Add Tournament" }}
-        </li>
-      </ol>
-    </nav>
-  </div>
-  <div>
-    <form #tournamentForm="ngForm">
-      <div>
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="mt-2">
+        {{ tournamentId ? "Edit Tournament" : "Add Tournament" }}
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ tournamentId ? "Edit Tournament" : "Add Tournament" }}
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-sm-12">
+      <form #tournamentForm="ngForm">
+        <div class="col-sm-12">
+          <div class="form-group mb-2">
+            <label for="name" class="form-label">
+              Name <span class="requiredStar">*</span>
+            </label>
             <input
               type="text"
-              matInput
+              class="form-control"
               id="name"
               required
               placeholder="e.g. tournament X, knockout Y"
@@ -28,121 +30,137 @@
               name="name"
               #name="ngModel"
             />
-            <mat-error *ngIf="name.errors && isSubmitted"
-              >Name is required</mat-error
-            >
-          </mat-form-field>
+          </div>
+          <div *ngIf="name.errors && isSubmitted" class="text-danger">
+            <div [hidden]="!name?.errors?.['required']">Name is required</div>
+          </div>
         </div>
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Description</mat-label>
+        <br />
+        <div class="col-sm-12">
+          <div class="form-group mb-2">
+            <label for="description" class="form-label"> Description </label>
             <textarea
-              matInput
+              class="form-control"
               id="description"
               placeholder="e.g. it is a soccer competition where the players confront each other only once."
               [(ngModel)]="manageTournamentForm.description"
               name="description"
               #description="ngModel"
             ></textarea>
-          </mat-form-field>
-        </div>
-        <div>
-          <div>
-            <h3>Participants</h3>
-            <button
-              type="button"
-              [hidden]="!isReadOnly"
-              (click)="addParticipant()"
-              mat-flat-button
-              color="primary"
-            >
-              Add Participant
-            </button>
           </div>
         </div>
-        <div
-          *ngFor="
-            let participant of manageTournamentForm.participants;
-            let i = index
-          "
-        >
-          <mat-form-field appearance="outline">
-            <mat-label>#{{ i + 1 }}</mat-label>
-            <input
-              matInput
-              type="text"
-              name="participant"
-              placeholder="e.g. Joe, Jane"
-              (blur)="saveParticipant(i, $event)"
-              [(ngModel)]="participant.name"
-            />
-            <button
-              [hidden]="!isReadOnly"
-              (click)="removeParticipant(i)"
-              mat-icon-button
-              matIconSuffix
+        <br />
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group mb-4">
+                <h3>Participants</h3>
+                <button
+                  type="button"
+                  [hidden]="!isReadOnly"
+                  (click)="addParticipant()"
+                  class="btn btn-primary btn-sm"
+                >
+                  Add Participant
+                </button>
+              </div>
+            </div>
+            <div
+              class="col-sm-6"
+              *ngFor="
+                let participant of manageTournamentForm.participants;
+                let i = index
+              "
             >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <div>
-          <div *ngIf="isSubmitted" class="text-danger">
-            <div [hidden]="isParticipantValid">
-              The number of participants must be a multiple of 8.
+              <div class="input-group mb-2">
+                <span class="input-group-text text-sm"> #{{ i + 1 }} </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="e.g. Jane, Joe"
+                  (blur)="saveParticipant(i, $event)"
+                  [value]="participant.name"
+                />
+                <button
+                  tabindex="-1"
+                  [hidden]="!isReadOnly"
+                  (click)="removeParticipant(i)"
+                  class="btn btn-danger"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div *ngIf="isSubmitted" class="text-danger">
+              <div [hidden]="isParticipantValid">
+                The number of participants must be multiple of 8.
+              </div>
             </div>
           </div>
         </div>
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Start date</mat-label>
+        <br />
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="startDate" class="form-label">
+              Start date <span class="requiredStar">*</span>
+            </label>
             <input
-              matInput
+              type="date"
+              class="form-control"
               id="startDate"
               name="startDate"
-              [matDatepicker]="picker"
+              required
               placeholder="e.g. mm/dd/yyyy"
               [(ngModel)]="manageTournamentForm.startDateString"
+              startDate="startDate"
               #startDate="ngModel"
             />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="startDate.errors && isSubmitted">
+          </div>
+          <div *ngIf="startDate.errors && isSubmitted" class="text-danger">
+            <div [hidden]="!startDate?.errors?.['required']">
               Start date is required
-            </mat-error>
-          </mat-form-field>
+            </div>
+          </div>
         </div>
-        <div>
-          <mat-checkbox
-            id="completed"
-            name="completed"
-            [(ngModel)]="manageTournamentForm.completed"
-          >
-            Completed
-          </mat-checkbox>
+        <br />
+        <div class="col-sm-12">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              id="deleted"
+              name="completed"
+              class="form-check-input"
+              [(ngModel)]="manageTournamentForm.completed"
+              completed="completed"
+              #completed="ngModel"
+            />
+            <label class="form-check-label" for="completed"> Completed </label>
+          </div>
         </div>
-        <div>
-          <mat-checkbox
-            id="hidden"
-            name="hidden"
-            [(ngModel)]="manageTournamentForm.hidden"
-          >
-            Hidden
-          </mat-checkbox>
+        <div class="col-sm-12">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              id="deleted"
+              name="deleted"
+              class="form-check-input"
+              [(ngModel)]="manageTournamentForm.deleted"
+              deleted="deleted"
+              #deleted="ngModel"
+            />
+            <label class="form-check-label" for="deleted"> Hidden </label>
+          </div>
         </div>
-        <div>
-          <button
-            mat-flat-button
-            color="primary"
-            (click)="saveTournament(tournamentForm.form.valid)"
-          >
-            Submit
-          </button>
-        </div>
-      </div>
-    </form>
+        <br />
+        <button
+          class="btn btn-primary"
+          (click)="saveTournament(tournamentForm.form.valid)"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   </div>
 </div>
