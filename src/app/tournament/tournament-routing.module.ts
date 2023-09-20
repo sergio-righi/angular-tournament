@@ -9,28 +9,28 @@ const routes: Routes = [
     path: 'manage/:id',
     component: ManageTournamentComponent,
     resolve: {
-      isAuthenticated: TournamentAuthResolver
+      // isAuthenticated: TournamentAuthResolver
     }
   },
   {
     path: 'manage',
     component: ManageTournamentComponent,
     resolve: {
-      isAuthenticated: TournamentAuthResolver
+      // isAuthenticated: TournamentAuthResolver
     }
   },
   {
     path: 'view/:id',
     component: ViewTournamentComponent,
     resolve: {
-      isAuthenticated: TournamentAuthResolver
+      // isAuthenticated: TournamentAuthResolver
     }
   },
   {
     path: 'view',
     component: ViewTournamentComponent,
     resolve: {
-      isAuthenticated: TournamentAuthResolver
+      // isAuthenticated: TournamentAuthResolver
     }
   }
 ];

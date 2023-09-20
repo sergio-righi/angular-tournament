@@ -57,4 +57,5 @@ export class TournamentForm implements Tournament {
   startDate?: number;
   completed: boolean = false;
   deleted: boolean = false;
+  hidden: boolean = false;
 }

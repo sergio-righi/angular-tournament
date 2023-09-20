@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: ProfileComponent,
     resolve: {
-      isAuthenticated: ProfileAuthResolver
+      // isAuthenticated: ProfileAuthResolver
     }
   },
 ];

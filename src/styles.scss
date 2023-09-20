@@ -1,4 +1,14 @@
-@import "assets/styles/base";
-@import "assets/styles/colors";
-@import "assets/styles/helpers";
-@import "assets/styles/variables";
+@use "assets/styles/base";
+@use "assets/styles/colors";
+@use "assets/styles/helpers";
+@use "assets/styles/variables";
+@use "assets/styles/components";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

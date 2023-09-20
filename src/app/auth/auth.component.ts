@@ -51,16 +51,16 @@ export class AuthComponent implements OnInit {
     this.isSubmitting = true;
     this.errors = { errors: {} };
 
-    const credentials = this.authForm.value;
-    this.userService
-      .attemptAuth(this.authType, credentials)
-      .subscribe(
-        data => this.router.navigateByUrl('/'),
-        err => {
-          this.errors = err;
-          this.isSubmitting = false;
-        }
-      );
+    // const credentials = this.authForm.value;
+    // this.userService
+    //   .attemptAuth(this.authType, credentials)
+    //   .subscribe(
+    //     data => this.router.navigateByUrl('/'),
+    //     err => {
+    //       this.errors = err;
+    //       this.isSubmitting = false;
+    //     }
+    //   );
   }
 
   togglePassword() {

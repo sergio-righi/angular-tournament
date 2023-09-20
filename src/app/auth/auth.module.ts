@@ -6,9 +6,10 @@ import { RegisterComponent } from './register.component';
 import { NoAuthGuard } from './no-auth-guard.service';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from 'app/shared';
+import { MaterialModule } from 'app/material.module';
 
 @NgModule({
-  imports: [
+  imports: [MaterialModule,
     SharedModule,
     AuthRoutingModule
   ],

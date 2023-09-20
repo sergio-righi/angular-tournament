@@ -9,7 +9,7 @@ import * as data from 'assets/data/tournament.json';
 @Injectable()
 export class TournamentService {
 
-  tournaments: Array<Tournament> = data;
+  tournaments: Array<Tournament> = [];
 
   constructor(
     private apiService: ApiService

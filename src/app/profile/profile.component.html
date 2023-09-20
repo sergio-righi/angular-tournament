@@ -1,71 +1,69 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h3 class="mt-2">Profile</h3>
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Profile</li>
-        </ol>
-      </nav>
-    </div>
-    <div class="col-sm-12">
-      <form #profileForm="ngForm">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group mb-2">
-              <label for="username" class="form-label"> Username </label>
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                [value]="manageProfileForm.username"
-              />
-            </div>
-          </div>
-          <br />
-          <div class="col-md-6">
-            <div class="form-group mb-2">
-              <label for="email" class="form-label">
-                Email <span class="requiredStar">*</span>
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="email"
-                required
-                [(ngModel)]="manageProfileForm.email"
-                email="email"
-                #email="ngModel"
-              />
-            </div>
-            <div *ngIf="email.errors && isSubmitted" class="text-danger">
+<div>
+  <div>
+    <h3>Profile</h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+      </ol>
+    </nav>
+  </div>
+  <div>
+    <form #profileForm="ngForm">
+      <div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input
+              type="text"
+              matInput
+              readonly
+              [value]="manageProfileForm.username"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              type="text"
+              matInput
+              id="email"
+              required
+              [(ngModel)]="manageProfileForm.email"
+              name="email"
+              email
+              #email="ngModel"
+            />
+            <mat-error *ngIf="email.errors && isSubmitted">
               <div [hidden]="!email?.errors?.['required']">
                 Email is required
               </div>
-            </div>
-          </div>
-          <br />
-          <div class="col-sm-12">
-            <div class="form-group mb-2">
-              <label for="bio" class="form-label"> Bio </label>
-              <textarea
-                class="form-control"
-                id="bio"
-                [(ngModel)]="manageProfileForm.bio"
-                name="bio"
-                #bio="ngModel"
-              ></textarea>
-            </div>
-          </div>
+            </mat-error>
+          </mat-form-field>
         </div>
-        <button
-          class="btn btn-primary"
-          (click)="saveUser(profileForm.form.valid)"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Bio</mat-label>
+            <textarea
+              matInput
+              id="bio"
+              name="bio"
+              [(ngModel)]="manageProfileForm.bio"
+              #bio="ngModel"
+            ></textarea>
+          </mat-form-field>
+        </div>
+        <div>
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="saveUser(profileForm.form.valid)"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

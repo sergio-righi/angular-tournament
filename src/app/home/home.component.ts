@@ -1,8 +1,6 @@
 import { Component, OnInit, Type } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ToastrService } from 'ngx-toastr';
-
 import { TournamentService, UserService } from 'app/core';
 import { toDateString } from 'app/core/utils';
 
@@ -25,9 +23,10 @@ const MODALS: { [name: string]: Type<any> } = {
 export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
-    private tournamentService: TournamentService,
-    private toastr: ToastrService
+    private tournamentService: TournamentService
   ) { }
+
+  displayedColumns: string[] = ['name', 'participants', 'startDate', 'actions'];
 
   ngOnInit(): void { }
 

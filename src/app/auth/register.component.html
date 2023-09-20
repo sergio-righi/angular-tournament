@@ -2,31 +2,31 @@
   <div class="auth-container">
     <div class="brand">
       <a [routerLink]="['']">
-        <img src="/assets/images/BLPRS.svg" />
+        <img src="/assets/images/logo.svg" />
       </a>
     </div>
 
     <div class="form">
       <form #tournamentForm="ngForm">
-        <div class="form-group mb-2">
-          <label for="name" class="form-label"> Name </label>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
           <input
+            matInput
             type="text"
-            class="form-control"
             id="name"
             name="name"
             required
-            placeholder="e.g. Behnaz, Peeter"
+            placeholder="e.g. Joe, Jane"
             [(ngModel)]="manageUserForm.name"
             name="name"
             #name="ngModel"
           />
-        </div>
-        <div class="form-group mb-2">
-          <label for="email" class="form-label"> Email </label>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
           <input
+            matInput
             type="email"
-            class="form-control"
             id="email"
             name="email"
             required
@@ -35,12 +35,12 @@
             email="email"
             #email="ngModel"
           />
-        </div>
-        <div class="form-group mb-2">
-          <label for="username" class="form-label"> Username </label>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
           <input
+            matInput
             type="text"
-            class="form-control"
             id="username"
             name="username"
             required
@@ -49,33 +49,35 @@
             username="username"
             #username="ngModel"
           />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="passwordType"
+            id="password"
+            name="password"
+            required
+            placeholder="e.g. abDe12%3"
+            [(ngModel)]="manageUserForm.password"
+            password="password"
+            #password="ngModel"
+          />
+          <button mat-icon-button matSuffix (click)="togglePassword()">
+            <mat-icon>
+              {{ isPasswordVisible ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+        <div>
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="saveUser(userForm.form.valid)"
+          >
+            Sign Up
+          </button>
         </div>
-        <div class="form-group">
-          <label for="password" class="form-label"> Password </label>
-          <div class="input-group mb-3">
-            <input
-              [type]="passwordType"
-              class="form-control"
-              id="password"
-              name="password"
-              required
-              placeholder="e.g. abDe12%3"
-              [(ngModel)]="manageUserForm.password"
-              password="password"
-              #password="ngModel"
-            />
-            <span class="input-group-text" (click)="togglePassword()">
-              <i
-                class="fas"
-                [class.fa-eye]="!isPasswordVisible"
-                [class.fa-eye-slash]="isPasswordVisible"
-              ></i>
-            </span>
-          </div>
-        </div>
-        <button class="btn btn-primary" (click)="saveUser(userForm.form.valid)">
-          Sign Up
-        </button>
       </form>
       <div class="footnote">
         <span>Already have an account?</span>

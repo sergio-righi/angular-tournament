@@ -46,6 +46,8 @@ export class ManageTournamentComponent implements OnInit {
       this.manageTournamentForm.rounds = tournament.rounds;
       this.manageTournamentForm.startDate = tournament.startDate;
       this.manageTournamentForm.deleted = tournament.deleted;
+      this.manageTournamentForm.completed = tournament.completed;
+      this.manageTournamentForm.hidden = tournament.hidden;
     }
   }
 
@@ -121,6 +123,7 @@ export class TournamentForm implements Tournament {
   startDate?: number;
   completed: boolean = false;
   deleted: boolean = false;
+  hidden: boolean = false;
 
   get startDateString(): string {
     return this.startDate ? toDateString(this.startDate) : "";

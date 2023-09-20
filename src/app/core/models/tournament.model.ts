@@ -12,4 +12,5 @@ export interface Tournament {
   startDate?: number;
   completed: boolean;
   deleted: boolean;
+  hidden: boolean;
 }
