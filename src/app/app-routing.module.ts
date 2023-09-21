@@ -1,39 +1,63 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { IndexComponent } from "./components/index/index.component";
+import { AddEditComponent } from "./components/tournament/add-edit.component";
+import { ListComponent } from "./components/tournament/list.component";
+import { ViewComponent } from "./components/tournament/view.component";
+import { AuthComponent } from "./components/auth/auth.component";
+import { RegisterComponent } from "./components/auth/register.component";
+import { ProfileComponent } from "./components/user/profile.component";
 
-import { DefaultComponent } from './layout/default.component';
-import { EmptyComponent } from './layout/empty.component';
+import { DefaultLayoutComponent } from "./components/layout/default.component";
+import { EmptyLayoutComponent } from "./components/layout/empty.component";
+import { AuthGuard } from "./components/auth/auth.guard";
 
-const defaultLayout: Routes = [
+const routesDefaultLayout: Routes = [
+  { path: "", component: IndexComponent },
   {
-    path: '',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    path: "tournament/list",
+    component: ListComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "tournament/view/:id", component: ViewComponent },
+  {
+    path: "tournament/:mode",
+    component: AddEditComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'tournament',
-    loadChildren: () => import('./tournament/tournament.module').then(m => m.TournamentModule)
+    path: "tournament/:mode/:id",
+    component: AddEditComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
-  }
+    path: "user/profile",
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
-const emptyLayout: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-  }
+const routesEmptyLayout: Routes = [
+  { path: "login", component: AuthComponent },
+  { path: "register", component: RegisterComponent },
 ];
 
 const routes: Routes = [
-  { path: '', component: DefaultComponent, children: defaultLayout },
-  { path: 'auth', component: EmptyComponent, children: emptyLayout },
-  { path: '**', redirectTo: '404' }
+  {
+    path: "",
+    component: DefaultLayoutComponent,
+    children: routesDefaultLayout,
+  },
+  {
+    path: "auth",
+    component: EmptyLayoutComponent,
+    children: routesEmptyLayout,
+  },
+  { path: "**", redirectTo: "" },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

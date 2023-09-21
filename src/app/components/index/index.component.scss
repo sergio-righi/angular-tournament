@@ -1,0 +1,42 @@
+@import "../../../assets/styles/variables";
+
+.tournament {
+  display: block;
+  text-decoration: none;
+  color: var(--color-font);
+  border-radius: $border-radius;
+  padding: $default-distance * 1;
+  background-color: var(--color-theme);
+  margin-bottom: $default-distance * 1.375;
+
+  & > .name {
+    font-weight: 300;
+    font-size: $font-size * 1;
+
+    & > .badge {
+      float: right;
+    }
+  }
+
+  & > .information {
+    display: flex;
+    font-size: $font-size * 0.875;
+    margin-top: $default-distance * 1;
+
+    & > .participants {
+    }
+
+    & > .date {
+      margin-left: auto;
+    }
+
+    & > .date,
+    & > .participants {
+      & > i {
+        font-size: $font-size * 0.75;
+        color: var(--color-font-light);
+        margin-right: $default-distance * 0.5;
+      }
+    }
+  }
+}

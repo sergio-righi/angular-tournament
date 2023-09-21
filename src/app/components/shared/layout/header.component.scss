@@ -1,0 +1,15 @@
+nav {
+  background-color: var(--color-primary);
+
+  & > .container {
+    & > .navbar-brand {
+      padding-bottom: 0;
+    }
+
+    & > .navbar-nav {
+      & > .nav-item > .nav-link {
+        color: var(--color-white);
+      }
+    }
+  }
+}

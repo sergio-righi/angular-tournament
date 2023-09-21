@@ -1,0 +1,125 @@
+<section class="section-auth">
+  <div class="auth-container">
+    <div class="brand">
+      <a href="/">
+        <img src="/assets/images/logo.svg" />
+      </a>
+    </div>
+
+    <div class="form">
+      <!-- begin error message -->
+      <feedback-message [message]="message" [error]="true"></feedback-message>
+      <!-- end error message -->
+      <!-- begin registration form -->
+      <form novalidate #form="ngForm" (ngSubmit)="signup(form)">
+        <div class="row">
+          <!-- begin first name -->
+          <div class="col-6">
+            <div class="form-group mb-2">
+              <label for="firstName" class="form-label"> First Name </label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                name="firstName"
+                required
+                placeholder="e.g. Jane, Joe"
+                [(ngModel)]="user.firstName"
+              />
+            </div>
+          </div>
+          <!-- end first name -->
+          <!-- begin last name -->
+          <div class="col-6">
+            <div class="form-group mb-2">
+              <label for="lastName" class="form-label"> Last Name </label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                name="lastName"
+                required
+                placeholder="e.g. Jane, Joe"
+                [(ngModel)]="user.lastName"
+              />
+            </div>
+          </div>
+          <!-- end last name -->
+          <!-- begin email -->
+          <div class="col-12">
+            <div class="form-group mb-2">
+              <label for="email" class="form-label"> Email </label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+                placeholder="e.g. jane@gmail.com"
+                [(ngModel)]="user.email"
+              />
+            </div>
+          </div>
+          <!-- end email -->
+          <!-- begin username -->
+          <div class="col-12">
+            <div class="form-group mb-2">
+              <label for="username" class="form-label"> Username </label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+                placeholder="e.g. jane1, joe6"
+                [(ngModel)]="user.username"
+              />
+            </div>
+          </div>
+          <!-- end username -->
+          <!-- begin password -->
+          <div class="col-12">
+            <div class="form-group">
+              <label for="password" class="form-label"> Password </label>
+              <div class="input-group mb-3">
+                <input
+                  [type]="passwordType"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required
+                  placeholder="e.g. abDe12%3"
+                  [(ngModel)]="user.password"
+                />
+                <span class="input-group-text" (click)="togglePassword()">
+                  <i
+                    class="fas"
+                    [class.fa-eye]="!isPasswordVisible"
+                    [class.fa-eye-slash]="isPasswordVisible"
+                  ></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- end password -->
+          <!-- begin form controls -->
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Sign Up</button>
+          </div>
+          <!-- end form controls -->
+        </div>
+      </form>
+      <!-- end registration form -->
+      <!-- begin footnote -->
+      <div class="footnote">
+        <span>Already have an account?</span>
+        <a [routerLink]="['/auth', 'login']">Sign In</a>
+      </div>
+      <!-- end footnote -->
+    </div>
+
+    <div class="illustration">
+      <img src="/assets/images/register_illustration.svg" />
+    </div>
+  </div>
+</section>

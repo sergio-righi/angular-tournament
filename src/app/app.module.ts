@@ -1,27 +1,32 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule } from "@angular/forms";
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { LayoutModule } from './layout/layout.module';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+
+import { IndexModule } from "./components/index/index.module";
+import { AuthModule } from "./components/auth/auth.module";
+import { TournamentModule } from "./components/tournament/tournament.module";
+import { SharedModule } from "./components/shared/shared.module";
+import { LayoutModule } from "./components/layout/layout.module";
+import { AuthGuard } from "./components/auth/auth.guard";
+import { UserModule } from "./components/user/user.module";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
     BrowserModule,
-    CoreModule,
-    LayoutModule,
+    FormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+    SharedModule,
+    LayoutModule,
+    IndexModule,
+    AuthModule,
+    TournamentModule,
+    UserModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

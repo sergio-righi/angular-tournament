@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <!-- begin header -->
+      <div class="mt-2">
+        <a
+          [routerLink]="['/tournament', 'add']"
+          class="btn btn-primary btn-sm float-end"
+        >
+          Create new Tournament
+        </a>
+        <h3>My Tournaments</h3>
+      </div>
+      <!-- end header -->
+
+      <!-- begin breadcrumb -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            My Tournaments
+          </li>
+        </ol>
+      </nav>
+      <!-- end breadcrumb -->
+
+      <!-- begin loading -->
+      <loading-placeholder *ngIf="!this.isReady"></loading-placeholder>
+      <!-- end loading -->
+
+      <!-- begin list tournament -->
+      <div class="table-responsive" *ngIf="this.isReady">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th class="text-center"></th>
+              <th>Name</th>
+              <th class="text-center">No. of participants</th>
+              <th class="text-center">Start Date</th>
+              <th class="text-center">Done</th>
+              <th class="text-center" colspan="3">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="tournamentList.length > 0">
+            <tr *ngFor="let item of tournamentList; let i = index">
+              <td class="text-center">#{{ i + 1 }}</td>
+              <td>{{ item.name }}</td>
+              <td class="text-center">{{ item.participants.length }}</td>
+              <td class="text-center">{{ item.startedAt }}</td>
+              <td class="text-center">
+                <span *ngIf="item.completed">Yes</span>
+                <span *ngIf="!item.completed">No</span>
+              </td>
+              <td class="text-center">
+                <button
+                  [routerLink]="['/tournament', 'view', item.id]"
+                  class="btn bg-secondary btn-primary btn-sm"
+                >
+                  <i class="fas fa-folder-tree"></i>
+                </button>
+              </td>
+              <td class="text-center">
+                <button
+                  [routerLink]="['/tournament', 'edit', item.id]"
+                  class="btn bg-primary btn-primary btn-sm"
+                >
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+              </td>
+              <td class="text-center">
+                <button
+                  (click)="deleteMethod(item.id)"
+                  class="btn bg-danger btn-danger btn-sm"
+                >
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <!-- begin empty table -->
+          <tbody *ngIf="tournamentList.length === 0">
+            <tr>
+              <td class="text-center" colspan="6">No records to display :(</td>
+            </tr>
+          </tbody>
+          <!-- end empty table -->
+        </table>
+      </div>
+      <!-- end list tournament -->
+    </div>
+  </div>
+</div>

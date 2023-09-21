@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <!-- begin header -->
+      <div class="d-flex flex-wrap mt-2">
+        <h3 class="me-auto">
+          {{ completed ? "Completed Tournaments" : "Ongoing Tournaments" }}
+        </h3>
+        <div class="d-inline-flex align-items-center">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              id="completed"
+              name="completed"
+              class="form-check-input"
+              [(ngModel)]="completed"
+            />
+            <label class="form-check-label" for="completed"> Completed </label>
+          </div>
+          <span>&nbsp;&nbsp;</span>
+          <a
+            [routerLink]="['/tournament', 'add']"
+            class="btn btn-primary btn-sm"
+          >
+            Create new Tournament
+          </a>
+        </div>
+      </div>
+      <!-- end header -->
+
+      <br />
+
+      <!-- begin loading -->
+      <loading-placeholder *ngIf="!this.isReady"></loading-placeholder>
+      <!-- end loading -->
+
+      <!-- begin no record found -->
+      <no-record-placeholder
+        *ngIf="this.isReady && tournamentList.length === 0"
+      ></no-record-placeholder>
+      <!-- end no record found -->
+
+      <!-- begin list of tournaments -->
+      <div class="row" *ngIf="this.isReady">
+        <div
+          class="col-sm-6 col-md-4 col-lg-3"
+          *ngFor="let item of tournamentList"
+        >
+          <a class="tournament" [routerLink]="['/tournament', 'view', item.id]">
+            <div class="name">
+              {{ item.name }}
+              <span *ngIf="item.completed" class="badge bg-primary">
+                Completed
+              </span>
+              <span *ngIf="!item.completed" class="badge bg-secondary">
+                Ongoing
+              </span>
+            </div>
+            <div class="information">
+              <div class="participants">
+                <i class="fas fa-users"></i>
+                {{ item.participants.length }}
+              </div>
+              <div class="date">
+                <i class="fas fa-calendar"></i> {{ item.startedAt }}
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- end list of tournaments -->
+    </div>
+  </div>
+</div>

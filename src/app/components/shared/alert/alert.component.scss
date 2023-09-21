@@ -1,0 +1,58 @@
+@import "../../../../assets/styles/variables";
+
+.alert-popup {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  position: fixed;
+  visibility: hidden;
+  background-color: rgba(100, 100, 100, 0.5);
+
+  &.active {
+    z-index: 9;
+    visibility: visible;
+  }
+
+  & > .alert-content {
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    max-width: 400px;
+    position: absolute;
+    border-radius: $border-radius;
+    padding: $default-distance * 1;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-theme);
+
+    & > .alert-dismiss {
+      cursor: pointer;
+      position: absolute;
+      border-radius: $border-radius;
+      top: -#{$default-distance * 0.5};
+      right: -#{$default-distance * 0.5};
+      background-color: var(--color-theme);
+      box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.75);
+      padding: $default-distance * 0.25 $default-distance * 0.65;
+    }
+
+    & > .alert-header {
+      font-weight: 600;
+      font-size: $font-size * 1.25;
+    }
+
+    & > .alert-body {
+      margin: $default-distance * 1.25 0;
+
+      & > .alert-wrapper {
+        height: 250px;
+        overflow-y: auto;
+
+        & > div:last-child table {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
