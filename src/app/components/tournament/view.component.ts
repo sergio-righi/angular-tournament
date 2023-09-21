@@ -4,6 +4,7 @@ import { hasStarted } from 'app/utils';
 import { Tournament } from 'app/models';
 import { AuthService } from "app/models/auth.service";
 import { TournamentRepository } from 'app/models/tournament.repository';
+import { LocaleService } from 'app/models/locale.service';
 
 @Component({
   selector: 'app-tournament-view',
@@ -18,11 +19,11 @@ export class ViewComponent implements OnInit {
   constructor(private repository: TournamentRepository,
     private router: Router,
     private auth: AuthService,
-    private activeRoute: ActivatedRoute) {
+    private activeRoute: ActivatedRoute,
+    public locale: LocaleService) {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.repository.setTournaments();
     this.tournamentId = this.activeRoute.snapshot.params["id"];
     if (this.tournamentId) {
       this.tournament = this.repository.getItem(this.tournamentId);

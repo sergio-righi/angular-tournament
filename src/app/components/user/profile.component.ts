@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
+import { LocaleService } from "app/models/locale.service";
 import { User } from "app/models/user.model";
 import { UserRepository } from "app/models/user.repository";
 
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
   isPasswordVisible: boolean = false;
   isEditing: boolean = false;
 
-  constructor(public repository: UserRepository, private router: Router) {
+  constructor(public repository: UserRepository, private router: Router, public locale: LocaleService) {
   }
 
   ngOnInit(): void {

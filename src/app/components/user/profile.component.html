@@ -2,16 +2,18 @@
   <div class="row">
     <div class="col-12">
       <!-- begin header -->
-      <h3 class="mt-2">My Profile</h3>
+      <h3 class="mt-2">{{ locale.t.title.profile }}</h3>
       <!-- end header -->
 
       <!-- begin breadcrumb -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a [routerLink]="'/'">Home</a>
+            <a [routerLink]="'/'">{{ locale.t.title.home }}</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ locale.t.title.profile }}
+          </li>
         </ol>
       </nav>
       <!-- end breadcrumb -->
@@ -39,16 +41,18 @@
           <!-- begin first name -->
           <div class="col col-sm-6">
             <div class="form-group mb-2">
-              <label for="firstName" class="form-label"> First Name </label>
+              <label for="firstName" class="form-label">
+                {{ locale.t.label.first_name }}
+              </label>
               <input
+                required
                 type="text"
-                class="form-control"
-                [disabled]="!isEditing"
                 id="firstName"
                 name="firstName"
-                required
-                placeholder="e.g. Jane, Joe"
+                class="form-control"
+                [disabled]="!isEditing"
                 [(ngModel)]="user.firstName"
+                [placeholder]="locale.t.placeholder.first_name"
               />
             </div>
           </div>
@@ -56,16 +60,18 @@
           <!-- begin last name -->
           <div class="col col-sm-6">
             <div class="form-group mb-2">
-              <label for="lastName" class="form-label"> Last Name </label>
+              <label for="lastName" class="form-label">
+                {{ locale.t.label.last_name }}
+              </label>
               <input
+                required
                 type="text"
-                class="form-control"
-                [disabled]="!isEditing"
                 id="lastName"
                 name="lastName"
-                required
-                placeholder="e.g. Jane, Joe"
+                class="form-control"
+                [disabled]="!isEditing"
                 [(ngModel)]="user.lastName"
+                [placeholder]="locale.t.placeholder.last_name"
               />
             </div>
           </div>
@@ -73,16 +79,18 @@
           <!-- begin email -->
           <div class="col-12">
             <div class="form-group mb-2">
-              <label for="email" class="form-label"> Email </label>
+              <label for="email" class="form-label">
+                {{ locale.t.label.email }}
+              </label>
               <input
+                required
+                id="email"
+                name="email"
                 type="email"
                 class="form-control"
                 [disabled]="!isEditing"
-                id="email"
-                name="email"
-                required
-                placeholder="e.g. jane@gmail.com"
                 [(ngModel)]="user.email"
+                [placeholder]="locale.t.placeholder.email"
               />
             </div>
           </div>
@@ -90,16 +98,18 @@
           <!-- begin username -->
           <div class="col-12">
             <div class="form-group mb-2">
-              <label for="username" class="form-label"> Username </label>
+              <label for="username" class="form-label">
+                {{ locale.t.label.username }}
+              </label>
               <input
+                required
                 type="text"
-                class="form-control"
-                [disabled]="!isEditing"
                 id="username"
                 name="username"
-                required
-                placeholder="e.g. jane1, joe6"
+                class="form-control"
+                [disabled]="!isEditing"
                 [(ngModel)]="user.username"
+                [placeholder]="locale.t.placeholder.username"
               />
             </div>
           </div>
@@ -107,17 +117,19 @@
           <!-- begin password -->
           <div class="col-12">
             <div class="form-group">
-              <label for="password" class="form-label"> Password </label>
+              <label for="password" class="form-label">
+                {{ locale.t.label.passwrod }}
+              </label>
               <div class="input-group mb-3">
                 <input
+                  required
+                  id="password"
+                  name="password"
                   [type]="passwordType"
                   class="form-control"
                   [disabled]="!isEditing"
-                  id="password"
-                  name="password"
-                  required
-                  placeholder="e.g. abDe12%3"
                   [(ngModel)]="user.password"
+                  [placeholder]="locale.t.placeholder.password"
                 />
                 <span class="input-group-text" (click)="togglePassword()">
                   <i
@@ -139,12 +151,12 @@
               (click)="toggleEditMode()"
             >
               <i class="fa-regular fa-pen-to-square"></i>
-              Edit
+              {{ locale.t.action.edit }}
             </button>
             <span>&nbsp;</span>
             <button class="btn btn-success" type="submit" *ngIf="isEditing">
               <i class="fa-solid fa-pen-to-square"></i>
-              Update Information
+              {{ locale.t.action.save }}
             </button>
             <span>&nbsp;</span>
             <button
@@ -154,7 +166,7 @@
               (click)="toggleEditMode()"
             >
               <i class="fa-solid fa-rotate-left"></i>
-              Cancel
+              {{ locale.t.action.cancel }}
             </button>
           </div>
           <!-- end form controls -->

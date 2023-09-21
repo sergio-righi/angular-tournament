@@ -10,14 +10,14 @@
           class="btn btn-primary btn-sm float-end"
         >
           <i class="fa-solid fa-pen-to-square"></i>
-          Save Changes
+          {{ locale.t.action.save }}
         </button>
         <button
           *ngIf="tournament.completed"
           (click)="viewSummary()"
           class="btn btn-primary btn-sm float-end"
         >
-          View Summary
+          {{ locale.t.action.view_summary }}
         </button>
         <h3 class="mt-2">{{ tournament.name }}</h3>
       </div>
@@ -26,9 +26,13 @@
       <!-- begin breadcrumb -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a [routerLink]="'/'">Home</a></li>
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/'"> {{ locale.t.title.home }}</a>
+          </li>
           <li class="breadcrumb-item" *ngIf="isOwner">
-            <a [routerLink]="['/tournament', 'list']">My Tournaments</a>
+            <a [routerLink]="['/tournament', 'list']">
+              {{ locale.t.title.my_tournament }}
+            </a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             {{ tournament.name }}

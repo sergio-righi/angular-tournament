@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "app/models/auth.service";
+import { LocaleService } from "app/models/locale.service";
 
 @Component({
   selector: "app-auth",
@@ -14,7 +15,7 @@ export class AuthComponent implements OnInit {
   public message: string = "";
   isPasswordVisible: boolean = false;
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService, public locale: LocaleService) { }
 
   ngOnInit() { }
 
@@ -32,10 +33,10 @@ export class AuthComponent implements OnInit {
       if (response) {
         this.router.navigateByUrl(this.auth.redirectUrl || "");
       } else {
-        this.message = 'Something went wrong';
+        this.message = this.locale.t.message.request_error;
       }
     } else {
-      this.message = "Invalid Form Data"
+      this.message = this.locale.t.message.invalid_data;
     }
   }
 }

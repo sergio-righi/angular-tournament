@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Tournament } from "app/models";
 import { hasStarted } from "app/utils";
 import { TournamentRepository } from "app/models/tournament.repository";
+import { LocaleService } from "app/models/locale.service";
 
 @Component({
   selector: "app-index",
@@ -9,22 +10,21 @@ import { TournamentRepository } from "app/models/tournament.repository";
   styleUrls: ["./index.component.scss"],
 })
 export class IndexComponent implements OnInit {
-  title = "Home";
+  title: string;
   completed: boolean = false;
 
-  constructor(private repository: TournamentRepository) {
+  constructor(private repository: TournamentRepository, public locale: LocaleService) {
+    this.title = locale.t.title.home;
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.repository.setTournaments();
-  }
+  async ngOnInit() { }
 
   get isReady(): boolean {
     return this.repository.isReady;
   }
 
   get tournamentList(): Tournament[] {
-    return this.repository.getTournaments().filter(
+    return this.repository.tournaments.filter(
       (t: Tournament) =>
         !t.deleted &&
         t.completed === this.completed &&

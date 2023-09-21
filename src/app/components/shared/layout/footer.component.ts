@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LocaleService } from "app/models/locale.service";
 
 @Component({
   selector: "app-footer",
@@ -6,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./footer.component.scss"],
 })
 export class FooterComponent implements OnInit {
-  constructor() { }
+  constructor(public locale: LocaleService) { }
 
   ngOnInit(): void { }
 }

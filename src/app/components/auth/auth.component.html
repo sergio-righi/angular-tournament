@@ -10,21 +10,23 @@
       <!-- begin error message -->
       <feedback-message [message]="message" [error]="true"></feedback-message>
       <!-- end error message -->
-      <div class="greeting">Hi There!</div>
+      <div class="greeting">{{ locale.t.auth.greeting }}</div>
       <!-- begin authentication form -->
       <form novalidate #form="ngForm" (ngSubmit)="authenticate(form)">
         <div class="row">
           <!-- begin username -->
           <div class="col-12">
             <div class="form-group mb-2">
-              <label for="username" class="form-label"> Username </label>
+              <label for="username" class="form-label">
+                {{ locale.t.label.username }}
+              </label>
               <input
                 type="text"
-                class="form-control"
                 id="username"
                 name="username"
-                placeholder="Enter your username"
+                class="form-control"
                 [(ngModel)]="username"
+                [placeholder]="locale.t.placeholder.username"
               />
             </div>
           </div>
@@ -32,15 +34,17 @@
           <!-- begin password -->
           <div class="col-12">
             <div class="form-group">
-              <label for="password" class="form-label"> Password </label>
+              <label for="password" class="form-label">
+                {{ locale.t.label.password }}
+              </label>
               <div class="input-group mb-3">
                 <input
-                  [type]="passwordType"
-                  class="form-control"
                   id="password"
                   name="password"
-                  placeholder="Enter your password"
+                  class="form-control"
+                  [type]="passwordType"
                   [(ngModel)]="password"
+                  [placeholder]="locale.t.placeholder.password"
                 />
                 <span class="input-group-text" (click)="togglePassword()">
                   <i
@@ -55,7 +59,9 @@
           <!-- end password -->
           <div class="col-12">
             <!-- begin form controls -->
-            <button class="btn btn-primary" type="submit">Sign In</button>
+            <button class="btn btn-primary" type="submit">
+              {{ locale.t.action.sign_in }}
+            </button>
             <!-- end form controls -->
           </div>
         </div>
@@ -63,8 +69,10 @@
       <!-- end authentication form -->
       <!-- begin footnote -->
       <div class="footnote">
-        <span>Do not have an account?</span>
-        <a [routerLink]="['/auth', 'register']">Sign Up</a>
+        <span>{{ locale.t.auth.footnote }}</span>
+        <a [routerLink]="['/auth', 'register']">
+          {{ locale.t.action.sign_up }}
+        </a>
       </div>
       <!-- end footnote -->
     </div>

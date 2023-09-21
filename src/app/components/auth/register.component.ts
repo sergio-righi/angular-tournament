@@ -2,7 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "app/models/auth.service";
+import { LocaleService } from "app/models/locale.service";
 import { User } from "app/models/user.model";
+import { UserRepository } from "app/models/user.repository";
 
 @Component({
   selector: "app-register",
@@ -10,11 +12,11 @@ import { User } from "app/models/user.model";
   styleUrls: ["./auth.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-  public user: User = {} as User;
   public message: string = "";
+  public user: User = User.default;
   isPasswordVisible: boolean = false;
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private repository: UserRepository, public locale: LocaleService) { }
 
   ngOnInit(): void { }
 
@@ -28,14 +30,14 @@ export class RegisterComponent implements OnInit {
 
   async signup(form: NgForm) {
     if (form.valid) {
-      const response = await this.auth.signup(this.user)
+      const response = await this.repository.signup(this.user)
       if (response) {
         this.router.navigateByUrl("auth/login");
       } else {
-        this.message = 'Something went wrong';
+        this.message = this.locale.t.message.request_error;
       }
     } else {
-      this.message = "Invalid Form Data"
+      this.message = this.locale.t.message.invalid_data;
     }
   }
 }

@@ -4,7 +4,11 @@
       <!-- begin header -->
       <div class="d-flex flex-wrap mt-2">
         <h3 class="me-auto">
-          {{ completed ? "Completed Tournaments" : "Ongoing Tournaments" }}
+          {{
+            completed
+              ? locale.t.tournament.completed
+              : locale.t.tournament.ongoing
+          }}
         </h3>
         <div class="d-inline-flex align-items-center">
           <div class="form-check">
@@ -15,14 +19,16 @@
               class="form-check-input"
               [(ngModel)]="completed"
             />
-            <label class="form-check-label" for="completed"> Completed </label>
+            <label class="form-check-label" for="completed">
+              {{ locale.t.label.completed }}
+            </label>
           </div>
           <span>&nbsp;&nbsp;</span>
           <a
             [routerLink]="['/tournament', 'add']"
             class="btn btn-primary btn-sm"
           >
-            Create new Tournament
+            {{ locale.t.tournament.create }}
           </a>
         </div>
       </div>
@@ -50,10 +56,10 @@
             <div class="name">
               {{ item.name }}
               <span *ngIf="item.completed" class="badge bg-primary">
-                Completed
+                {{ locale.t.label.completed }}
               </span>
               <span *ngIf="!item.completed" class="badge bg-secondary">
-                Ongoing
+                {{ locale.t.label.ongoing }}
               </span>
             </div>
             <div class="information">

@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Tournament } from 'app/models/tournament.model';
 import { AuthService } from "app/models/auth.service";
 import { TournamentRepository } from 'app/models/tournament.repository';
-import { Round } from 'app/models';
+import { LocaleService } from 'app/models/locale.service';
 
 @Component({
   selector: "app-tournament-add-edit",
@@ -14,7 +14,7 @@ import { Round } from 'app/models';
   styleUrls: ["./add-edit.component.scss"],
 })
 export class AddEditComponent implements OnInit {
-  title: string = "Create new Tournament";
+  title: string;
   count: number = 0;
   hasBeenRemoved: boolean = false;
   isSubmitted: boolean = false;
@@ -25,12 +25,13 @@ export class AddEditComponent implements OnInit {
     private repository: TournamentRepository,
     private router: Router,
     private auth: AuthService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    public locale: LocaleService
   ) {
+    this.title = locale.t.tournament.manage;
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.repository.setTournaments();
+  async ngOnInit() {
 
     // Delete
     if (this.activeRoute.snapshot.params["mode"] === "delete") {

@@ -1,5 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Match, Participant, Round, Tournament } from 'app/models';
+import { LocaleService } from 'app/models/locale.service';
+import { interpolate } from "app/utils/helper.util";
 
 @Component({
   selector: 'app-alert',
@@ -14,7 +16,7 @@ export class AlertComponent implements OnInit {
 
   @ViewChild('elm') elm!: ElementRef;
 
-  constructor() { }
+  constructor(public locale: LocaleService) { }
 
   ngOnInit(): void { }
 
@@ -33,7 +35,7 @@ export class AlertComponent implements OnInit {
   }
 
   get title(): string {
-    return 'Summary : ' + this.tournament.name;
+    return `${this.locale.t.label.summary} : ${this.tournament.name}`;
   }
 
   get content(): string {
@@ -49,7 +51,8 @@ export class AlertComponent implements OnInit {
   }
 
   getRoundName(key: string): string {
-    return key === 'r16' ? 'Round of 16' : key === 'r8' ? 'Round of 8' : key === 'r4' ? 'Round of 4' : 'Round of 2';
+    const localeString = this.locale.t.label.round_of;
+    return key === 'r16' ? interpolate(localeString, { count: 16 }) : key === 'r8' ? interpolate(localeString, { count: 8 }) : key === 'r4' ? interpolate(localeString, { count: 4 }) : interpolate(localeString, { count: 2 });
   }
 
   dismissAlert(event: any): void {

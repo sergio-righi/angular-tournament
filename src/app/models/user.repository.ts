@@ -5,9 +5,14 @@ import { AuthService } from "./auth.service";
 
 @Injectable()
 export class UserRepository {
+  private _users: User[] = [];
   isReady: boolean = false;
 
   constructor(private userApi: RestService, private authApi: AuthService) { }
+
+  get users(): User[] {
+    return this._users;
+  }
 
   get getUser(): User {
     this.isReady = true;
@@ -21,5 +26,13 @@ export class UserRepository {
     } else {
       console.log(`Error: Something went wrong`);
     }
+  }
+
+  async signup(user: User): Promise<User> {
+    const response = await this.userApi.signup(user);
+    const newSession = { ...user, id: response.payload }
+    this.users.push(newSession);
+    this.authApi.session = newSession;
+    return newSession;
   }
 }

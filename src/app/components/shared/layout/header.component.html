@@ -48,18 +48,18 @@
         <a
           *ngIf="auth.authenticated"
           class="nav-link"
-          [class.active]="title == 'Profile'"
+          [class.active]="title === locale.t.title.profile"
           [routerLink]="['tournament', 'list']"
-          >Tournament</a
+          >{{ locale.t.title.tournament }}</a
         >
       </li>
       <li class="nav-item">
         <a
           *ngIf="auth.authenticated"
           class="nav-link"
-          [class.active]="title == 'Profile'"
+          [class.active]="title === locale.t.title.profile"
           [routerLink]="['/user', 'profile']"
-          >Profile</a
+          >{{ locale.t.title.profile }}</a
         >
       </li>
       <li class="nav-item">
@@ -69,7 +69,7 @@
           routerLink=""
           (click)="logout()"
         >
-          Sign Out ({{ auth.session.username }})
+          {{ locale.t.action.sign_out }} ({{ auth.session.username }})
         </a>
       </li>
       <li class="nav-item">
@@ -78,7 +78,7 @@
           class="nav-link"
           [routerLink]="['auth', 'login']"
         >
-          Sign In
+          {{ locale.t.action.sign_in }}
         </a>
       </li>
       <li class="nav-item">
@@ -87,7 +87,7 @@
           class="nav-link"
           [routerLink]="['auth', 'register']"
         >
-          Sign Up
+          {{ locale.t.action.sign_up }}
         </a>
       </li>
     </ul>

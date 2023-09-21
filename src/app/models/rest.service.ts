@@ -53,9 +53,9 @@ export class RestService {
     }));
   }
 
-  async getUser(): Promise<ResponseModel<User>> {
+  async getUserList(): Promise<ResponseModel<User[]>> {
     return await asyncMethod(() => ({
-      status: 200, payload: {} as User
+      status: 200, payload: UserData
     }));
   }
 

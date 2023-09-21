@@ -43,13 +43,6 @@ export class AuthService {
     return {} as User;
   }
 
-  async signup(user: User): Promise<User> {
-    const response = await this.authApi.signup(user);
-    const newSession = { ...user, id: response.payload }
-    this.session = newSession;
-    return newSession;
-  }
-
   clear() {
     this.session = {} as User;
   }

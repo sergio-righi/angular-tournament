@@ -16,15 +16,17 @@
           <!-- begin first name -->
           <div class="col-6">
             <div class="form-group mb-2">
-              <label for="firstName" class="form-label"> First Name </label>
+              <label for="firstName" class="form-label">
+                {{ locale.t.label.first_name }}
+              </label>
               <input
+                required
                 type="text"
-                class="form-control"
                 id="firstName"
                 name="firstName"
-                required
-                placeholder="e.g. Jane, Joe"
+                class="form-control"
                 [(ngModel)]="user.firstName"
+                [placeholder]="locale.t.placeholder.first_name"
               />
             </div>
           </div>
@@ -32,15 +34,17 @@
           <!-- begin last name -->
           <div class="col-6">
             <div class="form-group mb-2">
-              <label for="lastName" class="form-label"> Last Name </label>
+              <label for="lastName" class="form-label">
+                {{ locale.t.label.last_name }}
+              </label>
               <input
+                required
                 type="text"
-                class="form-control"
                 id="lastName"
                 name="lastName"
-                required
-                placeholder="e.g. Jane, Joe"
+                class="form-control"
                 [(ngModel)]="user.lastName"
+                [placeholder]="locale.t.placeholder.last_name"
               />
             </div>
           </div>
@@ -48,15 +52,17 @@
           <!-- begin email -->
           <div class="col-12">
             <div class="form-group mb-2">
-              <label for="email" class="form-label"> Email </label>
+              <label for="email" class="form-label">
+                {{ locale.t.label.email }}
+              </label>
               <input
-                type="email"
-                class="form-control"
+                required
                 id="email"
                 name="email"
-                required
-                placeholder="e.g. jane@gmail.com"
+                type="email"
+                class="form-control"
                 [(ngModel)]="user.email"
+                [placeholder]="locale.t.placeholder.email"
               />
             </div>
           </div>
@@ -64,15 +70,17 @@
           <!-- begin username -->
           <div class="col-12">
             <div class="form-group mb-2">
-              <label for="username" class="form-label"> Username </label>
+              <label for="username" class="form-label">
+                {{ locale.t.label.username }}
+              </label>
               <input
+                required
                 type="text"
-                class="form-control"
                 id="username"
                 name="username"
-                required
-                placeholder="e.g. jane1, joe6"
+                class="form-control"
                 [(ngModel)]="user.username"
+                [placeholder]="locale.t.placeholder.username"
               />
             </div>
           </div>
@@ -80,16 +88,18 @@
           <!-- begin password -->
           <div class="col-12">
             <div class="form-group">
-              <label for="password" class="form-label"> Password </label>
+              <label for="password" class="form-label"
+                >{{ locale.t.label.password }}
+              </label>
               <div class="input-group mb-3">
                 <input
-                  [type]="passwordType"
-                  class="form-control"
+                  required
                   id="password"
                   name="password"
-                  required
-                  placeholder="e.g. abDe12%3"
+                  class="form-control"
+                  [type]="passwordType"
                   [(ngModel)]="user.password"
+                  placeholder="{{ locale.t.placeholder.password }}"
                 />
                 <span class="input-group-text" (click)="togglePassword()">
                   <i
@@ -104,7 +114,9 @@
           <!-- end password -->
           <!-- begin form controls -->
           <div class="col-12">
-            <button class="btn btn-primary" type="submit">Sign Up</button>
+            <button class="btn btn-primary" type="submit">
+              {{ locale.t.action.sign_up }}
+            </button>
           </div>
           <!-- end form controls -->
         </div>
@@ -112,8 +124,8 @@
       <!-- end registration form -->
       <!-- begin footnote -->
       <div class="footnote">
-        <span>Already have an account?</span>
-        <a [routerLink]="['/auth', 'login']">Sign In</a>
+        <span>{{ locale.t.register.footnote }}</span>
+        <a [routerLink]="['/auth', 'login']"> {{ locale.t.action.sign_in }}</a>
       </div>
       <!-- end footnote -->
     </div>

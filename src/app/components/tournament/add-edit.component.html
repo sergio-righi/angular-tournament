@@ -2,7 +2,10 @@
   <div class="row">
     <div class="col-12">
       <!-- begin header -->
-      <h3 class="mt-2">{{ editing ? "Edit" : "Create" }} Tournament</h3>
+      <h3 class="mt-2">
+        {{ editing ? locale.t.action.edit : locale.t.action.create }}
+        {{ locale.t.title.tournament }}
+      </h3>
       <!-- end header -->
 
       <!-- begin breadcrumb -->
@@ -10,10 +13,13 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a [routerLink]="'/'">Home</a></li>
           <li class="breadcrumb-item">
-            <a [routerLink]="['/tournament', 'list']">My Tournaments</a>
+            <a [routerLink]="['/tournament', 'list']">
+              {{ locale.t.title.my_tournament }}
+            </a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            {{ editing ? "Edit" : "Create" }} Tournament
+            {{ editing ? locale.t.action.edit : locale.t.action.create }}
+            {{ locale.t.title.tournament }}
           </li>
         </ol>
       </nav>
@@ -27,20 +33,22 @@
 
         <!-- begin name field -->
         <div class="form-group">
-          <label for="nameTextField">Name *</label>
+          <label for="nameTextField">{{ locale.t.label.title }} *</label>
           <input
             type="text"
-            class="form-control"
-            id="nameTextField"
-            placeholder="e.g. Tournament Y, Tournament Z"
             name="item"
+            id="nameTextField"
+            class="form-control"
             [(ngModel)]="tournament.name"
+            [placeholder]="locale.t.placeholder.title"
           />
         </div>
 
         <!-- name validation -->
         <div *ngIf="isSubmitted" class="text-danger">
-          <div [hidden]="isNameValid">The name cannot be empty.</div>
+          <div [hidden]="isNameValid">
+            {{ locale.t.message.required_field }}
+          </div>
         </div>
         <!-- end name validation -->
 
@@ -50,14 +58,14 @@
 
         <!-- begin description field -->
         <div class="form-group">
-          <label for="descTextField">Description</label>
+          <label for="descTextField">{{ locale.t.label.description }}</label>
           <textarea
             type="text"
-            class="form-control"
             id="descTextField"
-            placeholder="e.g. it is a soccer competition where the players confront each other only once."
             name="description"
+            class="form-control"
             [(ngModel)]="tournament.description"
+            [placeholder]="locale.t.placeholder.description"
           >
           </textarea>
         </div>
@@ -73,9 +81,9 @@
             class="btn btn-primary btn-sm float-end"
             [class.disabled]="isDisabled"
           >
-            Add Participant(s)
+            {{ locale.t.action.add }}
           </button>
-          <h3>Participants</h3>
+          <h3>{{ locale.t.label.participant }}</h3>
         </div>
         <!-- end participants control -->
 
@@ -88,12 +96,12 @@
             <div class="input-group mb-2">
               <span class="input-group-text text-sm"> #{{ i + 1 }} </span>
               <input
+                required
                 type="text"
                 class="form-control"
-                placeholder="e.g. Jane, Joe"
-                required
-                (blur)="saveParticipant(i, $event)"
                 [value]="participant.name"
+                (blur)="saveParticipant(i, $event)"
+                [placeholder]="locale.t.placeholder.participant"
               />
               <button
                 tabindex="-1"
@@ -111,8 +119,7 @@
         <!-- participants validation -->
         <div *ngIf="isSubmitted" class="text-danger">
           <div [hidden]="isParticipantValid">
-            The number of participants must be multiple of 8 and the names
-            cannot be empty.
+            {{ locale.t.message.invalid_participant_number }}
           </div>
         </div>
         <!-- end participants validation -->
@@ -121,21 +128,23 @@
         <br />
         <!-- start date field -->
         <div class="form-group">
-          <label for="startedAtTextField">Start Date</label>
+          <label for="startedAtTextField">{{
+            locale.t.label.start_date
+          }}</label>
           <input
+            required
             type="date"
+            name="startedAt"
             class="form-control"
             id="startedAtTextField"
-            name="startedAt"
             [(ngModel)]="tournament.startedAt"
-            required
           />
         </div>
 
         <!-- start date validation -->
         <div *ngIf="isSubmitted" class="text-danger">
           <div [hidden]="isStartDateValid">
-            The start date must be grater or equals to than today's date.
+            {{ locale.t.message.invalid_start_date }}
           </div>
         </div>
         <!-- end start date validation -->
@@ -146,13 +155,15 @@
         <!-- completed field -->
         <div class="form-check">
           <input
-            type="checkbox"
             id="completed"
+            type="checkbox"
             name="completed"
             class="form-check-input"
             [(ngModel)]="tournament.completed"
           />
-          <label class="form-check-label" for="completed"> Completed </label>
+          <label class="form-check-label" for="completed">
+            {{ locale.t.label.completed }}
+          </label>
         </div>
         <!-- end completed -->
 
@@ -165,7 +176,9 @@
             class="form-check-input"
             [(ngModel)]="tournament.deleted"
           />
-          <label class="form-check-label" for="deleted"> Hidden </label>
+          <label class="form-check-label" for="deleted">
+            {{ locale.t.label.hidden }}
+          </label>
         </div>
         <!-- end deleted -->
 
@@ -174,12 +187,12 @@
         <!-- begin actions -->
         <button class="btn btn-primary">
           <i class="fa-solid fa-pen-to-square"></i>
-          Submit
+          {{ locale.t.action.submit }}
         </button>
         <span>&nbsp;</span>
         <a [routerLink]="['/tournament', 'list']" class="btn btn-secondary">
           <i class="fa-solid fa-rotate-left"></i>
-          Cancel
+          {{ locale.t.action.cancel }}
         </a>
         <!-- end actions -->
       </form>

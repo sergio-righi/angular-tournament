@@ -66,3 +66,16 @@ export async function asyncMethod(callback: Function) {
   await delayPromise(500)
   return callback()
 }
+
+/**
+ * function to interpolate a string with their respective values
+ * @param {string} str string e.g. the {{user}} must be logged in
+ * @param {any} obj object e.g. { user: 'username' }
+ * @return {string} the username must be logged in
+ */
+
+export function interpolate(str: string, obj: any): string {
+  return Object.keys(obj).reduce((previousValue: string, currentValue: string) => {
+    return previousValue.replace(`{{${currentValue}}}`, obj[currentValue]);
+  }, str);
+};

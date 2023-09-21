@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { LocaleService } from "app/models/locale.service";
 
 @Component({
   selector: "loading-placeholder",
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from "@angular/core";
 export class LoadingComponent implements OnInit {
   @Input() indicator: boolean = false;
 
-  constructor() { }
+  constructor(public locale: LocaleService) { }
 
   ngOnInit(): void { }
 }

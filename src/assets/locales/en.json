@@ -1,0 +1,78 @@
+{
+  "action": {
+    "add": "Add",
+    "cancel": "Cancel",
+    "create": "Create",
+    "edit": "Edit",
+    "view_summary": "View summary",
+    "sign_in": "Sign In",
+    "sign_out": "Sign Out",
+    "sign_up": "Sign Up",
+    "save": "Save",
+    "submit": "Submit"
+  },
+  "auth": {
+    "greeting": "Hi There!",
+    "footnote": "Do not have an account?"
+  },
+  "footer": {
+    "copyright": "Copyright &copy; 2023"
+  },
+  "label": {
+    "action": "Actions",
+    "completed": "Completed",
+    "description": "Description",
+    "done": "Done",
+    "email": "Email",
+    "first_name": "First Name",
+    "hidden": "Hidden",
+    "last_name": "Last Name",
+    "match": "Match",
+    "no": "No",
+    "ongoing": "Ongoing",
+    "participant": "Participants",
+    "password": "Password",
+    "round_of": "Round of {{count}}",
+    "start_date": "Start Date",
+    "summary": "Summary",
+    "title": "Title",
+    "username": "Username",
+    "yes": "Yes"
+  },
+  "message": {
+    "delete_confirmation": "Are you sure you want to delete this?",
+    "invalid_data": "Invalid Form Data",
+    "invalid_participant_number": "The number of participants must be multiple of 8 and the names cannot be empty.",
+    "invalid_start_date": "The start date must be grater or equals to than today's date.",
+    "load_in_progress": "Loading...",
+    "no_record_placeholder": "No records to display :(",
+    "request_error": "Something went wrong",
+    "required_filed": "The field cannot be empty."
+  },
+  "placeholder": {
+    "description": "e.g. it is a soccer competition where the players confront each other only once.",
+    "email": "e.g. jane.smith@email.com",
+    "first_name": "e.g. Jane, Joe",
+    "last_name": "e.g. Smith, Doe",
+    "participant": "e.g. Jane, Joe",
+    "password": "Enter your password",
+    "title": "e.g. Tournament Y, Tournament Z",
+    "username": "Enter your username"
+  },
+  "register": {
+    "footnote": "Already have an account?"
+  },
+  "title": {
+    "home": "Home",
+    "my_tournament": "My Tournaments",
+    "profile": "Profile",
+    "tournament": "Tournament",
+    "tournament_list": "Tournament List"
+  },
+  "tournament": {
+    "completed": "Completed Tournaments",
+    "create": "Create new Tournament",
+    "manage": "Manage Tournament",
+    "ongoing": "Ongoing Tournaments"
+  }
+}

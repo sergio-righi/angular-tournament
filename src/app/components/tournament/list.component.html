@@ -7,18 +7,20 @@
           [routerLink]="['/tournament', 'add']"
           class="btn btn-primary btn-sm float-end"
         >
-          Create new Tournament
+          {{ locale.t.tournament.create }}
         </a>
-        <h3>My Tournaments</h3>
+        <h3>{{ locale.t.title.my_tournament }}</h3>
       </div>
       <!-- end header -->
 
       <!-- begin breadcrumb -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a [routerLink]="'/'">Home</a></li>
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/'">{{ locale.t.title.home }}</a>
+          </li>
           <li class="breadcrumb-item active" aria-current="page">
-            My Tournaments
+            {{ locale.t.title.my_tournament }}
           </li>
         </ol>
       </nav>
@@ -34,11 +36,13 @@
           <thead>
             <tr>
               <th class="text-center"></th>
-              <th>Name</th>
-              <th class="text-center">No. of participants</th>
-              <th class="text-center">Start Date</th>
-              <th class="text-center">Done</th>
-              <th class="text-center" colspan="3">Actions</th>
+              <th>{{ locale.t.label.title }}</th>
+              <th class="text-center">{{ locale.t.label.participant }}</th>
+              <th class="text-center">{{ locale.t.label.start_date }}</th>
+              <th class="text-center">{{ locale.t.label.done }}</th>
+              <th class="text-center" colspan="3">
+                {{ locale.t.label.action }}
+              </th>
             </tr>
           </thead>
 
@@ -49,8 +53,8 @@
               <td class="text-center">{{ item.participants.length }}</td>
               <td class="text-center">{{ item.startedAt }}</td>
               <td class="text-center">
-                <span *ngIf="item.completed">Yes</span>
-                <span *ngIf="!item.completed">No</span>
+                <span *ngIf="item.completed">{{ locale.t.label.yes }}</span>
+                <span *ngIf="!item.completed">{{ locale.t.label.no }}</span>
               </td>
               <td class="text-center">
                 <button
@@ -81,7 +85,9 @@
           <!-- begin empty table -->
           <tbody *ngIf="tournamentList.length === 0">
             <tr>
-              <td class="text-center" colspan="6">No records to display :(</td>
+              <td class="text-center" colspan="6">
+                {{ locale.t.message.no_record_placeholder }}
+              </td>
             </tr>
           </tbody>
           <!-- end empty table -->

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from 'app/models/auth.service';
+import { LocaleService } from "app/models/locale.service";
 import { Tournament } from "app/models/tournament.model";
 import { TournamentRepository } from "app/models/tournament.repository";
 import { toDateString } from 'app/utils';
@@ -11,21 +12,21 @@ import { toDateString } from 'app/utils';
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  title = "Tournament List";
+  title: string;
 
   constructor(
     private repository: TournamentRepository,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    public locale: LocaleService
   ) {
+    this.title = locale.t.title.tournament_list;
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.repository.setTournaments();
-  }
+  async ngOnInit() { }
 
   get tournamentList(): Tournament[] {
-    return this.repository.getTournaments().filter((item: Tournament) => {
+    return this.repository.tournaments.filter((item: Tournament) => {
       return item.owner === this.auth.session.id;
     });
   }
@@ -39,7 +40,7 @@ export class ListComponent implements OnInit {
   }
 
   deleteMethod(id: string) {
-    if (confirm("Are you sure?")) {
+    if (confirm(this.locale.t.message.delete_confirmation)) {
       this.repository.deleteTournament(id);
     }
   }
