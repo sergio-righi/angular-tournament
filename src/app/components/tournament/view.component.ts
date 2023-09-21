@@ -14,7 +14,7 @@ import { LocaleService } from 'app/models/locale.service';
 export class ViewComponent implements OnInit {
   tournamentId: string = "";
   visible: boolean = false;
-  tournament: Tournament = {} as Tournament;
+  tournament: Tournament | null = null;
 
   constructor(private repository: TournamentRepository,
     private router: Router,
@@ -26,29 +26,34 @@ export class ViewComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.tournamentId = this.activeRoute.snapshot.params["id"];
     if (this.tournamentId) {
-      this.tournament = this.repository.getItem(this.tournamentId);
+      this.tournament = await this.repository.findTournament(this.tournamentId);
     } else {
       this.router.navigateByUrl("/");
     }
   }
 
+  get isReady(): boolean {
+    return this.tournament !== null;
+  }
+
   get isOwner(): boolean {
-    return this.auth.authenticated && this.auth.session.id === this.tournament.owner;
+    return this.auth.authenticated && this.auth.session.id === this.tournament?.owner;
   }
 
   get hasStarted(): boolean {
-    return this.tournament.startedAt !== null && hasStarted(new Date(this.tournament.startedAt ?? ""));
+    return this.tournament?.startedAt !== null && hasStarted(new Date(this.tournament?.startedAt ?? ""));
   }
 
   get isReadOnly(): boolean {
-    return !this.isOwner || this.tournament.completed || !this.hasStarted;
+    return !this.isOwner || this.tournament?.completed || !this.hasStarted;
   }
 
   get hasWinner(): boolean {
-    return this.tournament.rounds.r2 && this.tournament.rounds.r2[0].winner !== -1
+    return this.tournament?.rounds.r2 && this.tournament?.rounds.r2[0].winner !== -1 || false
   }
 
   saveTournament() {
+    if (!this.tournament) return;
     if (this.hasWinner) {
       this.tournament.completed = true;
       this.viewSummary();

@@ -16,7 +16,12 @@ export class RegisterComponent implements OnInit {
   public user: User = User.default;
   isPasswordVisible: boolean = false;
 
-  constructor(private router: Router, private repository: UserRepository, public locale: LocaleService) { }
+  constructor(
+    private router: Router,
+    private repository: UserRepository,
+    private auth: AuthService,
+    public locale: LocaleService
+  ) { }
 
   ngOnInit(): void { }
 
@@ -32,7 +37,7 @@ export class RegisterComponent implements OnInit {
     if (form.valid) {
       const response = await this.repository.signup(this.user)
       if (response) {
-        this.router.navigateByUrl("auth/login");
+        this.router.navigateByUrl(this.auth.redirectUrl || "");
       } else {
         this.message = this.locale.t.message.request_error;
       }

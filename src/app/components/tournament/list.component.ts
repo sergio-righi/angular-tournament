@@ -13,6 +13,7 @@ import { toDateString } from 'app/utils';
 })
 export class ListComponent implements OnInit {
   title: string;
+  tournaments: Tournament[] | null = null;
 
   constructor(
     private repository: TournamentRepository,
@@ -23,16 +24,15 @@ export class ListComponent implements OnInit {
     this.title = locale.t.title.tournament_list;
   }
 
-  async ngOnInit() { }
-
-  get tournamentList(): Tournament[] {
-    return this.repository.tournaments.filter((item: Tournament) => {
+  async ngOnInit() {
+    const response = await this.repository.tournaments();
+    this.tournaments = response.filter((item: Tournament) => {
       return item.owner === this.auth.session.id;
     });
   }
 
   get isReady(): boolean {
-    return this.repository.isReady;
+    return this.tournaments !== null;
   }
 
   toDateString(value: any) {

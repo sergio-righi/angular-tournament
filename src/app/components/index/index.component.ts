@@ -12,24 +12,29 @@ import { LocaleService } from "app/models/locale.service";
 export class IndexComponent implements OnInit {
   title: string;
   completed: boolean = false;
+  tournaments: Tournament[] | null = null;
 
   constructor(private repository: TournamentRepository, public locale: LocaleService) {
     this.title = locale.t.title.home;
   }
 
-  async ngOnInit() { }
-
-  get isReady(): boolean {
-    return this.repository.isReady;
+  async ngOnInit() {
+    const response = await this.repository.tournaments();
+    this.tournaments = response;
   }
 
-  get tournamentList(): Tournament[] {
-    return this.repository.tournaments.filter(
-      (t: Tournament) =>
-        !t.deleted &&
-        t.completed === this.completed &&
-        t.startedAt !== null &&
-        hasStarted(new Date(t.startedAt ?? ""))
+  get isReady(): boolean {
+    return this.tournaments !== null;
+  }
+
+  get tournamentList() {
+    if (!this.tournaments) return [];
+    return this.tournaments.filter(
+      (item: Tournament) =>
+        !item.deleted &&
+        item.completed === this.completed &&
+        item.startedAt !== null &&
+        hasStarted(new Date(item.startedAt ?? ""))
     );
   }
 }

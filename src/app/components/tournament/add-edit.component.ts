@@ -42,7 +42,7 @@ export class AddEditComponent implements OnInit {
 
     // Edit
     if (this.editing) {
-      this.tournament = this.repository.getItem(this.activeRoute.snapshot.params["id"]);
+      this.tournament = await this.repository.findTournament(this.activeRoute.snapshot.params["id"]);
       this.count = this.tournament.participants?.length || 0;
     }
   }

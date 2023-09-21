@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="this.isReady && tournament !== null">
     <div class="col-12">
       <!-- begin header -->
       <div class="mt-2">
@@ -60,4 +60,8 @@
     ></app-alert>
     <!-- end alert -->
   </div>
+
+  <!-- begin loading -->
+  <loading-placeholder *ngIf="!this.isReady"></loading-placeholder>
+  <!-- end loading -->
 </div>

@@ -11,57 +11,77 @@ import UserData from "assets/data/user.json";
 
 @Injectable()
 export class RestService {
-  baseUrl: string;
+  private _users: User[] = UserData;
+  private _tournaments: Tournament[] = TournamentData;
 
-  constructor(private http: HttpClient) {
-    this.baseUrl = "";
+  async authenticate(username: string, password: string): Promise<ResponseModel<User>> {
+    return await asyncMethod(() => ({
+      status: 200, payload: this._users.find((user: User) => user.username === username && user.password === password)
+    }));
   }
 
   async getTournamentList(): Promise<ResponseModel<Tournament[]>> {
     return await asyncMethod(() => ({
-      status: 200, payload: TournamentData
+      status: 200, payload: this._tournaments
     }));
   }
 
-  async insertTournament(tournament: Tournament): Promise<ResponseModel<string>> {
+  async findTournament(id: string): Promise<ResponseModel<Tournament>> {
     return await asyncMethod(() => ({
-      status: 200, payload: Date.now().toString()
+      status: 200, payload: this._tournaments.find((item: Tournament) => item.id === id)
     }));
   }
 
-  async updateTournament(tournament: Tournament): Promise<ResponseModel<boolean>> {
+  async insertTournament(tournament: Tournament): Promise<ResponseModel<Tournament>> {
+    const tournamentId = Date.now().toString();
+    const newTournament = { ...tournament, id: tournamentId };
+    this._tournaments.push(newTournament);
+
     return await asyncMethod(() => ({
-      status: 200, payload: true
+      status: 200, payload: newTournament
+    }));
+  }
+
+  async updateTournament(id: string, tournament: Tournament): Promise<ResponseModel<Tournament>> {
+    const index = this._tournaments.findIndex((item: Tournament) => item.id === id);
+    const newTournament = { ...this._tournaments[index], ...tournament };
+    this._tournaments[index] = newTournament;
+
+    return await asyncMethod(() => ({
+      status: 200, payload: newTournament
     }));
   }
 
   async deleteTournament(id: string): Promise<ResponseModel<boolean>> {
+    this._tournaments = this._tournaments.filter((item: Tournament) => item.id !== id);
     return await asyncMethod(() => ({
       status: 200, payload: true
-    }));
-  }
-
-  async authenticate(username: string, password: string): Promise<ResponseModel<User>> {
-    return await asyncMethod(() => ({
-      status: 200, payload: UserData.find((user: User) => user.username === username && user.password === password)
-    }));
-  }
-
-  async signup(user: User): Promise<ResponseModel<string>> {
-    return await asyncMethod(() => ({
-      status: 200, payload: Date.now().toString()
     }));
   }
 
   async getUserList(): Promise<ResponseModel<User[]>> {
     return await asyncMethod(() => ({
-      status: 200, payload: UserData
+      status: 200, payload: this._users
     }));
   }
 
-  async updateUser(user: User): Promise<ResponseModel<boolean>> {
+  async signup(user: User): Promise<ResponseModel<User>> {
+    const userId = Date.now().toString();
+    const newUser = { ...user, id: userId };
+    this._users.push(newUser);
+
     return await asyncMethod(() => ({
-      status: 200, payload: true
+      status: 200, payload: newUser
+    }));
+  }
+
+  async updateUser(id: string, user: User): Promise<ResponseModel<User>> {
+    const index = this._users.findIndex((item: User) => item.id === id);
+    const newUser = { ...this._users[index], ...user };
+    this._users[index] = newUser;
+
+    return await asyncMethod(() => ({
+      status: 200, payload: newUser
     }));
   }
 }

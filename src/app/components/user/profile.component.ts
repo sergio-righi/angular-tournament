@@ -11,16 +11,24 @@ import { UserRepository } from "app/models/user.repository";
   styleUrls: ["./profile.component.scss"],
 })
 export class ProfileComponent implements OnInit {
-  public user: User = {} as User;
+  public user: User | null = null;
   public message: string = "";
   isPasswordVisible: boolean = false;
   isEditing: boolean = false;
 
-  constructor(public repository: UserRepository, private router: Router, public locale: LocaleService) {
+  constructor(
+    public repository: UserRepository,
+    private router: Router,
+    public locale: LocaleService
+  ) {
   }
 
   ngOnInit(): void {
     this.user = this.repository.getUser;
+  }
+
+  get isReady(): boolean {
+    return this.user !== null;
   }
 
   get passwordType(): string {

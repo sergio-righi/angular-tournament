@@ -4,48 +4,44 @@ import { Tournament } from "./tournament.model";
 
 @Injectable()
 export class TournamentRepository {
-  private _tournaments: Tournament[] = [];
-  isReady: boolean = false;
-
   constructor(private tournamentApi: RestService) { }
 
-  get tournaments(): Tournament[] {
-    return this._tournaments;
+  async tournaments(): Promise<Tournament[]> {
+    const response = await this.tournamentApi.getTournamentList();
+    return response.payload;
   }
 
-  getItem(id: string): Tournament {
-    return { ...this._tournaments.find((item: Tournament) => item.id === id)! };
+  async findTournament(id: string): Promise<Tournament> {
+    const response = await this.tournamentApi.findTournament(id);
+    return response.payload;
   }
 
-  async saveTournament(tournament: Tournament) {
+  async saveTournament(tournament: Tournament): Promise<Tournament | null> {
     if (tournament.id === null || tournament.id === "" || tournament.id === undefined) {
       const response = await this.tournamentApi.insertTournament(tournament);
       if (response && response.status === 200) {
-        this._tournaments.push({ ...tournament, id: response.payload });
+        return response.payload;
       } else {
         console.log(`Error: Something went wrong`);
       }
     } else {
-      const response = await this.tournamentApi.updateTournament(tournament);
+      const response = await this.tournamentApi.updateTournament(tournament.id, tournament);
       if (response && response.status === 200) {
-        this._tournaments.splice(
-          this._tournaments.findIndex((item: Tournament) => item.id === tournament.id),
-          1,
-          tournament
-        );
+        return tournament;
       } else {
         console.log(`Error: Something went wrong`);
       }
     }
+    return null;
   }
 
-  async deleteTournament(id: string) {
+  async deleteTournament(id: string): Promise<boolean> {
     const response = await this.tournamentApi.deleteTournament(id);
     if (response && response.status === 200) {
-      const index = this._tournaments.findIndex((item: Tournament) => item.id === id);
-      this._tournaments.splice(index, 1);
+      return response.payload;
     } else {
       console.log(`Error: Something went wrong`);
     }
+    return false;
   }
 }

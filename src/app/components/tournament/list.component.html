@@ -31,7 +31,10 @@
       <!-- end loading -->
 
       <!-- begin list tournament -->
-      <div class="table-responsive" *ngIf="this.isReady">
+      <div
+        class="table-responsive"
+        *ngIf="this.isReady && tournaments !== null"
+      >
         <table class="table table-bordered table-hover">
           <thead>
             <tr>
@@ -46,8 +49,8 @@
             </tr>
           </thead>
 
-          <tbody *ngIf="tournamentList.length > 0">
-            <tr *ngFor="let item of tournamentList; let i = index">
+          <tbody *ngIf="tournaments.length > 0">
+            <tr *ngFor="let item of tournaments; let i = index">
               <td class="text-center">#{{ i + 1 }}</td>
               <td>{{ item.name }}</td>
               <td class="text-center">{{ item.participants.length }}</td>
@@ -83,7 +86,7 @@
             </tr>
           </tbody>
           <!-- begin empty table -->
-          <tbody *ngIf="tournamentList.length === 0">
+          <tbody *ngIf="tournaments.length === 0">
             <tr>
               <td class="text-center" colspan="6">
                 {{ locale.t.message.no_record_placeholder }}

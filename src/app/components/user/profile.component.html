@@ -25,16 +25,14 @@
       <!-- end error message -->
 
       <!-- begin loading -->
-      <loading-placeholder
-        *ngIf="!this.repository.isReady"
-      ></loading-placeholder>
+      <loading-placeholder *ngIf="!isReady"></loading-placeholder>
       <!-- end loading -->
 
       <!-- begin profile form -->
       <form
         novalidate
         #form="ngForm"
-        *ngIf="this.repository.isReady"
+        *ngIf="isReady && user !== null"
         (ngSubmit)="save(form)"
       >
         <div class="row">

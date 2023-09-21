@@ -38,8 +38,14 @@ const routesDefaultLayout: Routes = [
 ];
 
 const routesEmptyLayout: Routes = [
-  { path: "login", component: AuthComponent },
-  { path: "register", component: RegisterComponent },
+  {
+    path: "login",
+    component: AuthComponent,
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
+  },
 ];
 
 const routes: Routes = [

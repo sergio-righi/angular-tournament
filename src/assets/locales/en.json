@@ -52,9 +52,9 @@
   "placeholder": {
     "description": "e.g. it is a soccer competition where the players confront each other only once.",
     "email": "e.g. jane.smith@email.com",
-    "first_name": "e.g. Jane, Joe",
+    "first_name": "e.g. Jane, John",
     "last_name": "e.g. Smith, Doe",
-    "participant": "e.g. Jane, Joe",
+    "participant": "e.g. Jane, John",
     "password": "Enter your password",
     "title": "e.g. Tournament Y, Tournament Z",
     "username": "Enter your username"
