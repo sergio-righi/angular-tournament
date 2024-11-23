@@ -1,39 +1,59 @@
 <div class="bracket" [class.out-of-8]="isEight">
-  <div class="content">
+  <div class="bracket-container">
     <section
       class="round"
-      [class.of-16]="round === 'r16'"
-      [class.of-8]="round === 'r8'"
-      [class.of-4]="round === 'r4'"
-      [class.of-2]="round === 'r2'"
-      *ngFor="let round of keys"
+      [class.of-16]="round.length === 8"
+      [class.of-8]="round.length === 4"
+      [class.of-4]="round.length === 2"
+      [class.of-2]="round.length === 1"
+      *ngFor="let round of rounds"
     >
-      <div class="box" *ngFor="let i of roundLength(round)">
+      <div class="box" *ngFor="let i of roundLength(round.length)">
         <div class="matchups">
-          <div class="matchup" *ngFor="let j of matchupLength(round, i)">
+          <div class="matchup" *ngFor="let j of matchupLength(round.length, i)">
             <div class="participants">
               <div
                 class="participant"
                 [class.c-pointer]="!readonly"
                 [class.pointer-events-none]="readonly"
-                [class.winner]="rounds[round][j].winner === 0"
-                (click)="advance(round, j, 0)"
+                [class.won]="hasWon(round[j], round[j].p1)"
+                (click)="advance(round.length, j, round[j].p1, round[j].p2)"
               >
-                <span>{{ getParticipant(rounds[round][j].x).name }}</span>
+                <span>
+                  {{ getParticipant(round[j].p1) }}
+                </span>
+                <div class="games">
+                  <span
+                    class="badge text-bg-dark"
+                    *ngFor="let game of round[j].games"
+                  >
+                    {{ getGameScore(game, "p1") }}
+                  </span>
+                </div>
               </div>
               <div
                 class="participant"
                 [class.c-pointer]="!readonly"
                 [class.pointer-events-none]="readonly"
-                [class.winner]="rounds[round][j].winner === 1"
-                (click)="advance(round, j, 1)"
+                [class.won]="hasWon(round[j], round[j].p2)"
+                (click)="advance(round.length, j, round[j].p2, round[j].p1)"
               >
-                <span>{{ getParticipant(rounds[round][j].y).name }}</span>
+                <span>
+                  {{ getParticipant(round[j].p2) }}
+                </span>
+                <div class="games">
+                  <span
+                    class="badge text-bg-dark"
+                    *ngFor="let game of round[j].games"
+                  >
+                    {{ getGameScore(game, "p2") }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="connector" *ngIf="rounds[round][i + 1]">
+        <div class="connector" *ngIf="round[i + 1]">
           <div class="bracket"></div>
           <div class="line"></div>
         </div>
@@ -41,3 +61,59 @@
     </section>
   </div>
 </div>
+
+<app-fab icon="fa fa-table" (onClick)="openModal()"></app-fab>
+
+<app-modal
+  [header]="locale.t.header.view_summary"
+  [show]="isModalVisible"
+  (close)="closeModal()"
+>
+  <div modal-body>
+    <table class="table table-bordered" *ngFor="let round of rounds">
+      <thead>
+        <tr>
+          <th class="text-center">{{ locale.t.label.match }}</th>
+          <th colspan="2" class="text-center">{{ getRoundName(round) }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let match of round; let i = index">
+          <!-- Match row -->
+          <tr>
+            <th class="t-col-fit text-center">#{{ i + 1 }}</th>
+            <td
+              class="text-center"
+              [class.table-primary]="match.p1 === match.won"
+            >
+              {{ getParticipant(match.p1) }}
+            </td>
+            <td
+              class="text-center"
+              [class.table-primary]="match.p2 === match.won"
+            >
+              {{ getParticipant(match.p2) }}
+            </td>
+          </tr>
+
+          <!-- Games row -->
+          <tr>
+            <td colspan="3" class="text-center bg-light">
+              <div *ngIf="match.games && match.games.length > 0">
+                <div
+                  class="d-inline-flex justify-content-center align-items-center mb-2"
+                  *ngFor="let game of match.games; let j = index"
+                >
+                  <span class="badge bg-secondary me-2">
+                    {{ locale.t.label.game }} {{ j + 1 }}
+                  </span>
+                  <span class="me-2">{{ getGame(game) }}</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</app-modal>

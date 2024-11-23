@@ -1,0 +1,71 @@
+@import "../../../../assets/styles/variables";
+
+.swiss {
+  width: 100%;
+  display: flex;
+  max-width: 100%;
+  overflow-x: auto;
+  position: relative;
+  flex-direction: column;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  & > .swiss-container {
+    .rounds {
+      display: flex;
+      flex-direction: column;
+      gap: $default-distance * 1;
+    }
+
+    .round {
+      h3 {
+        text-align: center;
+        margin-bottom: $default-distance * 0.5;
+      }
+
+      .matches {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $default-distance * 0.75;
+      }
+
+      .match {
+        text-align: center;
+        border-radius: $border-radius;
+        padding: $default-distance * 0.75;
+        flex: 1 1 calc(25% - $default-distance);
+        background-color: var(--bs-secondary-bg);
+        border: 1px solid var(--bs-border-color);
+
+        .wrapper {
+          align-items: center;
+          display: inline-flex;
+          gap: $default-distance * 0.5;
+
+          .participant {
+          }
+
+          .vs {
+            font-size: $font-size * 0.75;
+          }
+        }
+
+        .games {
+          display: flex;
+          justify-content: center;
+          gap: $default-distance * 0.75;
+          margin-top: $default-distance * 0.5;
+
+          .game {
+            display: flex;
+            flex-direction: column;
+
+            & > span:first-child {
+              font-size: $font-size * 0.65;
+              color: 1px solid var(--bs-border-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,13 +1,14 @@
 import { Participant } from "./participant.model";
-import { Round } from "./round.model";
+import { TournamentMode } from "app/utils";
 
 export class Tournament {
   static default = {
     id: "",
     name: "",
+    mode: TournamentMode.Knockout,
     description: "",
     participants: [],
-    rounds: {} as Round,
+    rounds: [],
     owner: "",
     startedAt: "",
     createdAt: Date.now(),
@@ -18,9 +19,10 @@ export class Tournament {
   constructor(
     public id: string,
     public name: string,
+    public mode: TournamentMode,
     public description: string,
     public participants: Participant[],
-    public rounds: Round,
+    public rounds: any[],
     public startedAt: string,
     public owner: string,
     public createdAt: number = Date.now(),

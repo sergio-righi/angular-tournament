@@ -1,0 +1,34 @@
+<div
+  class="modal modal-lg fade show"
+  tabindex="-1"
+  role="dialog"
+  [class.d-block]="show"
+  [class.modal-overlay]="show"
+  aria-labelledby="modalTitle"
+  aria-hidden="!show"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 id="modalTitle" class="modal-title">{{ header }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="onClose()"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <ng-content select="[modal-body]"></ng-content>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <ng-content select="[modal-footer]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

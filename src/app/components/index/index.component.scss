@@ -6,7 +6,7 @@
   color: var(--color-font);
   border-radius: $border-radius;
   padding: $default-distance * 1;
-  background-color: var(--bs-light);
+  background-color: var(--bs-secondary-bg);
   margin-bottom: $default-distance * 1.375;
 
   & > .name {

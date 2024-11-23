@@ -7,6 +7,7 @@ import { Tournament } from 'app/models/tournament.model';
 import { AuthService } from "app/models/auth.service";
 import { TournamentRepository } from 'app/models/tournament.repository';
 import { LocaleService } from 'app/models/locale.service';
+import { Match } from 'app/models';
 
 @Component({
   selector: "app-tournament-add-edit",
@@ -127,26 +128,26 @@ export class AddEditComponent implements OnInit {
     const { length } = this.tournament.participants;
     if (!this.hasBeenRemoved && this.count === length) return;
     if (length === 16) {
-      this.tournament.rounds.r16 = this.#generateRound(8);
-      this.tournament.rounds.r8 = this.#generateEmptyRound(4);
+      this.tournament.rounds.push(this.#generateRound(8));
+      this.tournament.rounds.push(this.#generateEmptyRound(4));
     } else if (length === 8) {
-      this.tournament.rounds.r16 = [];
-      this.tournament.rounds.r8 = this.#generateRound(4);
+      this.tournament.rounds.push([]);
+      this.tournament.rounds.push(this.#generateRound(4));
     }
-    this.tournament.rounds.r4 = this.#generateEmptyRound(2);
-    this.tournament.rounds.r2 = this.#generateEmptyRound(1);
+    this.tournament.rounds.push(this.#generateEmptyRound(2));
+    this.tournament.rounds.push(this.#generateEmptyRound(1));
   }
 
   #generateRound(count: number) {
     let jump = 0;
     return Array.from({ length: count }, (_, i) => {
       const index = jump++ + i;
-      return { x: this.tournament.participants[index].id, y: this.tournament.participants[index + 1].id, winner: -1 }
+      return { p1: this.tournament.participants[index].id, p2: this.tournament.participants[index + 1].id, won: "", lost: "", diff: 0 } as Match
     });
   }
 
   #generateEmptyRound(count: number) {
-    return Array.from({ length: count }, (_) => ({ x: "", y: "", winner: -1 }));
+    return Array.from({ length: count }, (_) => ({ p1: "", p2: "", won: "", lost: "", diff: 0 } as Match));
   }
 }
 

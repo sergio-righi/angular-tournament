@@ -1,5 +1,10 @@
+import { Game } from "./game.model";
+
 export interface Match {
-  x: string;
-  y: string;
-  winner: number;
+  p1: string;
+  p2: string;
+  won: string;
+  lost: string;
+  diff: number;
+  games: Game[]
 }

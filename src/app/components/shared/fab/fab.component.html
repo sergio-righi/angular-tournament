@@ -1,0 +1,13 @@
+<div
+  class="fab-container position-fixed"
+  [ngStyle]="{ bottom: position.bottom, right: position.right }"
+>
+  <button
+    type="button"
+    class="btn btn-primary btn-lg rounded-circle fab-btn shadow"
+    (click)="onFabClick()"
+    [attr.title]="tooltip"
+  >
+    <i [class]="icon"></i>
+  </button>
+</div>

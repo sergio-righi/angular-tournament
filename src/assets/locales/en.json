@@ -3,8 +3,8 @@
     "add": "Add",
     "cancel": "Cancel",
     "create": "Create",
+    "delete": "Delete",
     "edit": "Edit",
-    "view_summary": "View summary",
     "sign_in": "Sign In",
     "sign_out": "Sign Out",
     "sign_up": "Sign Up",
@@ -16,7 +16,13 @@
     "footnote": "Do not have an account?"
   },
   "footer": {
-    "copyright": "Copyright &copy; 2023"
+    "copyright": "Copyright 2024"
+  },
+  "header": {
+    "manage_game": "Manage games",
+    "standings": "Standings",
+    "view_standings": "Standings",
+    "view_summary": "View summary"
   },
   "label": {
     "action": "Actions",
@@ -25,6 +31,7 @@
     "done": "Done",
     "email": "Email",
     "first_name": "First Name",
+    "game": "Game",
     "hidden": "Hidden",
     "last_name": "Last Name",
     "match": "Match",
@@ -32,6 +39,7 @@
     "ongoing": "Ongoing",
     "participant": "Participants",
     "password": "Password",
+    "round": "Round",
     "round_of": "Round of {{count}}",
     "start_date": "Start Date",
     "summary": "Summary",
@@ -73,6 +81,12 @@
     "completed": "Completed Tournaments",
     "create": "Create new Tournament",
     "manage": "Manage Tournament",
-    "ongoing": "Ongoing Tournaments"
+    "ongoing": "Ongoing Tournaments",
+    "knockout": {
+      "round_of_16": "Eighth-finals",
+      "round_of_8": "Quarterfinals",
+      "round_of_4": "Semifinals",
+      "round_of_2": "Final"
+    }
   }
 }
