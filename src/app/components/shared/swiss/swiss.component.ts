@@ -5,6 +5,7 @@ import { LocaleService } from 'app/models/locale.service';
 import { Standings } from 'app/models/standings.model';
 import { SwissTournament } from 'app/utils';
 import { BaseTournamentComponent } from '../base';
+import { Round } from 'app/models/round.model';
 
 @Component({
   selector: 'app-swiss',
@@ -17,6 +18,10 @@ export class SwissComponent extends BaseTournamentComponent {
 
   constructor(public override locale: LocaleService) {
     super(locale);
+  }
+
+  get activeRounds(): Round[] {
+    return this.rounds.filter((round: Round) => round.matches[0].p1 !== "");
   }
 
   shouldHighlight(match: Match, game: Game): boolean {
@@ -54,7 +59,10 @@ export class SwissComponent extends BaseTournamentComponent {
 
   openStandingsModal(): void {
     const swissTournament = new SwissTournament(Object.keys(this.participants), 8);
-    swissTournament.simulateTournament(this.rounds);
+    swissTournament.simulateTournament(this.rounds.reduce((acc: Match[][], round: Round) => {
+      acc.push(round.matches); // Add each round's matches array to the accumulator
+      return acc;
+    }, []));
     this.standings = swissTournament.standings;
     this.isStandingsModalVisible = true;
   }

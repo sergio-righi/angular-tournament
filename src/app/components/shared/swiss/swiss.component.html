@@ -2,7 +2,7 @@
 <div class="swiss">
   <div class="swiss-container">
     <div class="rounds">
-      <div class="round" *ngFor="let round of rounds; let i = index">
+      <div class="round" *ngFor="let round of activeRounds; let i = index">
         <h3>{{ locale.t.label.round }} {{ i + 1 }}</h3>
         <div class="matches">
           <div
@@ -14,22 +14,20 @@
           >
             <div class="wrapper">
               <div
-                class="participant badge"
+                class="participant badge bg-secondary"
                 [class.bg-primary]="match.won === match.p1"
-                [class.bg-secondary]="match.lost === match.p1"
               >
                 {{ getParticipant(match.p1) }}
               </div>
               <div class="vs">vs</div>
               <div
-                class="participant badge"
+                class="participant badge bg-secondary"
                 [class.bg-primary]="match.won === match.p2"
-                [class.bg-secondary]="match.lost === match.p2"
               >
                 {{ getParticipant(match.p2) }}
               </div>
             </div>
-            <div class="games">
+            <div class="games" *ngIf="match.games.length > 0">
               <div class="game" *ngFor="let game of match.games; let i = index">
                 <span>{{ locale.t.label.game }} {{ i + 1 }}</span>
                 <span
@@ -130,6 +128,9 @@
             </button>
           </div>
         </div>
+      </li>
+      <li *ngIf="currentGames.length === 0" class="list-group-item">
+        {{ locale.t.message.no_games_have_been_recorded }}
       </li>
     </ul>
   </div>

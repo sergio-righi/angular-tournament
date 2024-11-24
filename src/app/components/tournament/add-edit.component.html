@@ -26,7 +26,7 @@
       <!-- end breadcrumb -->
 
       <!-- begin form -->
-      <form #form="ngForm" (ngSubmit)="save(form)">
+      <form #form="ngForm" (ngSubmit)="saveTournament(form)">
         <input type="hidden" name="id" [(ngModel)]="tournament.id" />
 
         <!-- begin name field -->
@@ -63,8 +63,10 @@
           <select
             id="modeDropdown"
             name="mode"
-            class="form-control"
+            class="form-select"
+            [disabled]="this.editing"
             [(ngModel)]="tournament.mode"
+            (ngModelChange)="tournament.mode = +$event"
             required
           >
             <option *ngFor="let mode of tournamentModes" [value]="mode.value">
@@ -105,7 +107,7 @@
 
         <!-- begin participants -->
         <!-- participants control -->
-        <div class="form-group mb-4">
+        <div class="form-group mb-2">
           <button
             type="button"
             [hidden]="isReadOnly"
@@ -115,7 +117,9 @@
           >
             {{ locale.t.action.add }}
           </button>
-          <h3>{{ locale.t.label.participant }}</h3>
+          <label class="form-label">
+            {{ locale.t.label.participant }}
+          </label>
         </div>
         <!-- end participants control -->
 
@@ -156,6 +160,76 @@
         </div>
         <!-- end participants validation -->
         <!-- end participants -->
+
+        <br />
+
+        <!-- begin rounds -->
+        <div *ngIf="tournament.rounds && tournament.rounds.length > 0">
+          <div
+            class="card mt-2"
+            *ngFor="let round of tournament.rounds; let roundIndex = index"
+          >
+            <div class="card-body">
+              <div class="form-group">
+                <label for="roundFormat{{ roundIndex }}" class="form-label">
+                  {{ "Round " + (roundIndex + 1) }}
+                </label>
+                <!-- Round Format Dropdown -->
+                <select
+                  name="roundFormat{{ roundIndex }}"
+                  [(ngModel)]="round.format"
+                  (ngModelChange)="round.format = +$event"
+                  class="form-select"
+                  required
+                  (ngModelChange)="onRoundFormatChange(round, round.format)"
+                >
+                  <option
+                    *ngFor="let format of tournamentFormats"
+                    [value]="format.value"
+                  >
+                    {{ format.label }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- begin matches -->
+              <div class="row">
+                <div
+                  class="col col-12 col-sm-4 col-md-3 col-lg"
+                  *ngFor="let match of round.matches; let matchIndex = index"
+                >
+                  <div class="form-group mt-2">
+                    <label
+                      for="matchFormat{{ roundIndex }}{{ matchIndex }}"
+                      class="form-label"
+                    >
+                      {{ "Match " + (matchIndex + 1) }}
+                    </label>
+                    <!-- Match Format Dropdown -->
+                    <select
+                      name="matchFormat{{ roundIndex }}{{ matchIndex }}"
+                      [(ngModel)]="match.format"
+                      class="form-select"
+                      required
+                      (ngModelChange)="
+                        onMatchFormatChange(round, match, match.format)
+                      "
+                    >
+                      <option
+                        *ngFor="let format of tournamentFormats"
+                        [value]="format.value"
+                      >
+                        {{ format.label }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- end matches -->
+            </div>
+          </div>
+        </div>
+        <!-- end rounds -->
 
         <br />
 

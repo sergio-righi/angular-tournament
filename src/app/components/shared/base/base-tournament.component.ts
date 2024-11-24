@@ -39,7 +39,7 @@ export abstract class BaseTournamentComponent implements OnInit {
   }
 
   getParticipant(id: string): string {
-    return this.participants[id] || "";
+    return this.participants[id] || "TBD";
   }
 
   getGame(game: Game): string {
