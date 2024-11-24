@@ -9,8 +9,8 @@
             class="match"
             [class.c-pointer]="!readonly"
             [class.pointer-events-none]="readonly"
-            (click)="openManageGamesModal(match)"
-            *ngFor="let match of round"
+            (click)="openManageGamesModal(i, j)"
+            *ngFor="let match of round; let j = index"
           >
             <div class="wrapper">
               <div
@@ -92,7 +92,7 @@
 
 <!-- begin manage modal -->
 <app-modal
-  [header]="locale.t.header.manage_game"
+  [header]="gameHeader"
   [show]="isManageGamesModalVisible"
   (close)="closeManageGamesModal()"
 >

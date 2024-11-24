@@ -12,19 +12,28 @@ import { SwissTournament } from 'app/utils';
 })
 export class SwissComponent implements OnInit {
   @Input() readonly: boolean = false;
-  @Input() rounds: any = [];
+  @Input() rounds: Match[][] = [];
   @Input() participants: { [id: string]: string } = {};
 
   isStandingsModalVisible: boolean = false; // Show the modal when managing games
   isManageGamesModalVisible: boolean = false; // Show the modal when managing games
 
-  selectedMatch: Match | null = null; // Track the match being edited
+  selectedRound: number = -1; // Track the round being edited
+  selectedMatch: number = -1; // Track the match being edited
   currentGames: Game[] = []; // Temporary storage for games while editing
   standings: Standings[] = [];
 
   constructor(public locale: LocaleService) { }
 
   ngOnInit(): void { }
+
+  get gameHeader(): string {
+    if (this.selectedRound >= 0 && this.selectedMatch >= 0) {
+      const match = this.rounds[this.selectedRound][this.selectedMatch];
+      return `${this.getParticipant(match.p1)} vs ${this.getParticipant(match.p2)}`;
+    }
+    return "";
+  }
 
   getParticipant(id: string): string {
     return this.participants[id];
@@ -79,15 +88,17 @@ export class SwissComponent implements OnInit {
   }
 
   // Open the modal to manage games for a specific match
-  openManageGamesModal(match: Match): void {
+  openManageGamesModal(round: number, match: number): void {
+    this.selectedRound = round;
     this.selectedMatch = match;
-    this.currentGames = [...match.games]; // Clone the games to a temporary array
+    this.currentGames = [...this.rounds[this.selectedRound][match].games]; // Clone the games to a temporary array
     this.isManageGamesModalVisible = true;
   }
 
   // Close the modal
   closeManageGamesModal(): void {
-    this.selectedMatch = null;
+    this.selectedRound = -1;
+    this.selectedMatch = -1;
     this.isManageGamesModalVisible = false;
   }
 
@@ -103,40 +114,46 @@ export class SwissComponent implements OnInit {
 
   // Save changes to the match's games
   saveGames(): void {
-    if (this.selectedMatch) {
-      // Update the match's games
-      this.selectedMatch.games = [...this.currentGames];
+    if (this.selectedRound >= 0 && this.selectedMatch >= 0) {
+      const currentMatch = this.rounds[this.selectedRound][this.selectedMatch];
+      currentMatch.games = [...this.currentGames]; // Update the match's games
 
-      // Initialize accumulated scores for players
-      let player1TotalScore = 0;
-      let player2TotalScore = 0;
+      let p1Score = 0;
+      let p2Score = 0;
+      let hasTiebreaker = false;
 
-      // Calculate the total score for each player across all games
-      this.selectedMatch.games.forEach(game => {
-        player1TotalScore += game.p1;
-        player2TotalScore += game.p2;
+      // Iterate through the games
+      currentMatch.games.forEach((game: Game) => {
+        if (game.tiebreaker) {
+          // If a tiebreaker exists, only consider tiebreaker scores
+          p1Score += game.tiebreaker.p1;
+          p2Score += game.tiebreaker.p2;
+          hasTiebreaker = true; // Mark that tiebreakers are present
+        } else if (!hasTiebreaker) {
+          // If no tiebreaker has been found so far, consider the normal scores
+          p1Score += game.p1;
+          p2Score += game.p2;
+        }
       });
 
-      // Determine the winner and loser based on accumulated scores
-      if (player1TotalScore > player2TotalScore) {
-        // Player 1 wins
-        this.selectedMatch.won = this.selectedMatch.p1;
-        this.selectedMatch.lost = this.selectedMatch.p2;
-      } else if (player1TotalScore < player2TotalScore) {
-        // Player 2 wins
-        this.selectedMatch.won = this.selectedMatch.p2;
-        this.selectedMatch.lost = this.selectedMatch.p1;
+      // Determine the winner and loser based on the scores
+      if (p1Score > p2Score) {
+        currentMatch.won = currentMatch.p1;
+        currentMatch.lost = currentMatch.p2;
+      } else if (p1Score < p2Score) {
+        currentMatch.won = currentMatch.p2;
+        currentMatch.lost = currentMatch.p1;
       } else {
-        // It's a tie based on total score
-        this.selectedMatch.won = ""; // Or however you want to represent a tie
-        this.selectedMatch.lost = ""; // Or however you want to represent a tie
+        // It's a tie
+        currentMatch.won = "";
+        currentMatch.lost = "";
       }
 
-      // Calculate the score difference (absolute value of the total score difference)
-      this.selectedMatch.diff = Math.abs(player1TotalScore - player2TotalScore);
-    }
+      // Calculate the score difference (absolute value)
+      currentMatch.diff = Math.abs(p1Score - p2Score);
 
-    // Close the modal after saving
-    this.closeManageGamesModal();
+      // Close the modal after saving
+      this.closeManageGamesModal();
+    }
   }
 }

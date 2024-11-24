@@ -17,7 +17,7 @@
                 [class.c-pointer]="!readonly"
                 [class.pointer-events-none]="readonly"
                 [class.won]="hasWon(round[j], round[j].p1)"
-                (click)="advance(round.length, j, round[j].p1, round[j].p2)"
+                (click)="openManageGamesModal(getRoundIndex(round.length), j)"
               >
                 <span>
                   {{ getParticipant(round[j].p1) }}
@@ -36,7 +36,7 @@
                 [class.c-pointer]="!readonly"
                 [class.pointer-events-none]="readonly"
                 [class.won]="hasWon(round[j], round[j].p2)"
-                (click)="advance(round.length, j, round[j].p2, round[j].p1)"
+                (click)="openManageGamesModal(getRoundIndex(round.length), j)"
               >
                 <span>
                   {{ getParticipant(round[j].p2) }}
@@ -62,12 +62,13 @@
   </div>
 </div>
 
-<app-fab icon="fa fa-table" (onClick)="openModal()"></app-fab>
+<app-fab icon="fa fa-table" (onClick)="openOverviewModal()"></app-fab>
 
+<!-- begin overview modal -->
 <app-modal
   [header]="locale.t.header.view_summary"
-  [show]="isModalVisible"
-  (close)="closeModal()"
+  [show]="isOverviewModalVisible"
+  (close)="closeOverviewModal()"
 >
   <div modal-body>
     <table class="table table-bordered" *ngFor="let round of rounds">
@@ -117,3 +118,98 @@
     </table>
   </div>
 </app-modal>
+<!-- end overview modal -->
+
+<!-- begin manage modal -->
+<app-modal
+  [header]="gameHeader"
+  [show]="isManageGamesModalVisible"
+  (close)="closeManageGamesModal()"
+>
+  <div modal-body>
+    <ul class="list-group">
+      <li
+        *ngFor="let game of currentGames; let i = index"
+        class="list-group-item"
+      >
+        <div class="d-flex flex-column">
+          <!-- Label Row -->
+          <div class="mb-2">
+            <strong>{{ locale.t.label.game }} {{ i + 1 }}</strong>
+          </div>
+
+          <!-- Inputs and Button Row -->
+          <div class="d-flex align-items-center justify-content-between">
+            <!-- Inputs -->
+            <div class="d-flex gap-2 flex-grow-1">
+              <input
+                type="number"
+                [(ngModel)]="game.p1"
+                class="form-control"
+                placeholder="Player 1"
+              />
+              <input
+                type="number"
+                [(ngModel)]="game.p2"
+                class="form-control"
+                placeholder="Player 2"
+              />
+            </div>
+            <!-- Buttons -->
+            <div class="d-flex align-items-center">
+              <button
+                class="btn btn-secondary ms-2"
+                (click)="toggleTiebreaker(i)"
+              >
+                {{
+                  game.tiebreaker ? locale.t.action.hide : locale.t.action.show
+                }}
+              </button>
+              <button class="btn btn-danger ms-2" (click)="removeGame(i)">
+                {{ locale.t.action.delete }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Tiebreaker Section -->
+          <div *ngIf="game.tiebreaker" class="mt-3 ps-3">
+            <div class="mb-2">
+              <strong>{{ locale.t.label.tiebreaker }}</strong>
+            </div>
+            <div class="d-flex gap-2">
+              <input
+                type="number"
+                [(ngModel)]="game.tiebreaker.p1"
+                class="form-control"
+                placeholder="Player 1 Tiebreaker"
+              />
+              <input
+                type="number"
+                [(ngModel)]="game.tiebreaker.p2"
+                class="form-control"
+                placeholder="Player 2 Tiebreaker"
+              />
+            </div>
+          </div>
+        </div>
+      </li>
+      <li *ngIf="currentGames.length === 0" class="list-group-item">
+        {{ locale.t.message.no_games_have_been_recorded }}
+      </li>
+    </ul>
+  </div>
+
+  <div modal-footer>
+    <button
+      class="btn btn-secondary btn-sm"
+      (click)="addGame()"
+      [disabled]="hasTiebreaker"
+    >
+      {{ locale.t.action.add }}
+    </button>
+    <button class="btn btn-primary btn-sm ms-2" (click)="saveGames()">
+      {{ locale.t.action.save }}
+    </button>
+  </div>
+</app-modal>
+<!-- end manage modal -->

@@ -5,10 +5,12 @@
     "create": "Create",
     "delete": "Delete",
     "edit": "Edit",
+    "hide": "Hide",
     "sign_in": "Sign In",
     "sign_out": "Sign Out",
     "sign_up": "Sign Up",
     "save": "Save",
+    "show": "Show",
     "submit": "Submit"
   },
   "auth": {
@@ -19,7 +21,6 @@
     "copyright": "Copyright 2024"
   },
   "header": {
-    "manage_game": "Manage games",
     "standings": "Standings",
     "view_standings": "Standings",
     "view_summary": "View summary"
@@ -53,7 +54,8 @@
     "invalid_participant_number": "The number of participants must be multiple of 8 and the names cannot be empty.",
     "invalid_start_date": "The start date must be grater or equals to than today's date.",
     "load_in_progress": "Loading...",
-    "no_record_placeholder": "No records to display :(",
+    "no_record_placeholder": "No records to display : (",
+    "no_games_have_been_recorded": "No games have been recorded for this match",
     "request_error": "Something went wrong",
     "required_filed": "The field cannot be empty."
   },

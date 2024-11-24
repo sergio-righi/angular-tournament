@@ -227,7 +227,7 @@ export class SwissTournament {
     else console.log(`-------- Winner ${roundResults[0].won} --------`);
   }
 
-  simulateTournament(results?: MatchResult[]): void {
+  simulateTournament(results?: any): void {
     while (this.checkEndCondition()) {
       this.generateRound();
       this.printRound();

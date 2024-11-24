@@ -63,7 +63,7 @@ export class ViewComponent implements OnInit {
   }
 
   get hasWinner(): boolean {
-    return this.tournament?.rounds[this.tournament.rounds.length - 1].won !== ""
+    return this.tournament?.rounds[this.tournament.rounds.length - 1][0].won !== ""
   }
 
   saveTournament() {
