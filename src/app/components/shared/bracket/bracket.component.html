@@ -2,30 +2,33 @@
   <div class="bracket-container">
     <section
       class="round"
-      [class.of-16]="round.length === 8"
-      [class.of-8]="round.length === 4"
-      [class.of-4]="round.length === 2"
-      [class.of-2]="round.length === 1"
+      [class.of-16]="round.matches.length === 8"
+      [class.of-8]="round.matches.length === 4"
+      [class.of-4]="round.matches.length === 2"
+      [class.of-2]="round.matches.length === 1"
       *ngFor="let round of rounds"
     >
-      <div class="box" *ngFor="let i of roundLength(round.length)">
+      <div class="box" *ngFor="let i of bracket(round.matches.length)">
         <div class="matchups">
-          <div class="matchup" *ngFor="let j of matchupLength(round.length, i)">
+          <div
+            class="matchup"
+            *ngFor="let j of matchup(round.matches.length, i)"
+          >
             <div class="participants">
               <div
                 class="participant"
                 [class.c-pointer]="!readonly"
                 [class.pointer-events-none]="readonly"
-                [class.won]="hasWon(round[j], round[j].p1)"
-                (click)="openManageGamesModal(getRoundIndex(round.length), j)"
+                [class.won]="hasWon(round.matches[j], round.matches[j].p1)"
+                (click)="openManageGamesModal(round.index, j)"
               >
                 <span>
-                  {{ getParticipant(round[j].p1) }}
+                  {{ getParticipant(round.matches[j].p1) }}
                 </span>
                 <div class="games">
                   <span
                     class="badge text-bg-dark"
-                    *ngFor="let game of round[j].games"
+                    *ngFor="let game of round.matches[j].games"
                   >
                     {{ getGameScore(game, "p1") }}
                   </span>
@@ -35,16 +38,16 @@
                 class="participant"
                 [class.c-pointer]="!readonly"
                 [class.pointer-events-none]="readonly"
-                [class.won]="hasWon(round[j], round[j].p2)"
-                (click)="openManageGamesModal(getRoundIndex(round.length), j)"
+                [class.won]="hasWon(round.matches[j], round.matches[j].p2)"
+                (click)="openManageGamesModal(round.index, j)"
               >
                 <span>
-                  {{ getParticipant(round[j].p2) }}
+                  {{ getParticipant(round.matches[j].p2) }}
                 </span>
                 <div class="games">
                   <span
                     class="badge text-bg-dark"
-                    *ngFor="let game of round[j].games"
+                    *ngFor="let game of round.matches[j].games"
                   >
                     {{ getGameScore(game, "p2") }}
                   </span>
@@ -53,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="connector" *ngIf="round[i + 1]">
+        <div class="connector" *ngIf="round.matches[i + 1]">
           <div class="bracket"></div>
           <div class="line"></div>
         </div>
@@ -75,11 +78,13 @@
       <thead>
         <tr>
           <th class="text-center">{{ locale.t.label.match }}</th>
-          <th colspan="2" class="text-center">{{ getRoundName(round) }}</th>
+          <th colspan="2" class="text-center">
+            {{ getRoundName(round.matches) }}
+          </th>
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let match of round; let i = index">
+        <ng-container *ngFor="let match of round.matches; let i = index">
           <!-- Match row -->
           <tr>
             <th class="t-col-fit text-center">#{{ i + 1 }}</th>

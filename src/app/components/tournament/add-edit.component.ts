@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ObjectID } from 'bson'
-import { hasStarted, hasValue, isNotEmpty, setTimeToZero } from 'app/utils';
+import { TournamentMode, hasStarted, hasValue, isNotEmpty, setTimeToZero } from 'app/utils';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tournament } from 'app/models/tournament.model';
 import { AuthService } from "app/models/auth.service";
@@ -21,6 +21,13 @@ export class AddEditComponent implements OnInit {
   isSubmitted: boolean = false;
   editing: boolean = false;
   tournament: Tournament = Tournament.default;
+
+  tournamentModes = Object.keys(TournamentMode)
+    .filter((key) => isNaN(Number(key))) // Exclude numeric keys
+    .map((key) => ({
+      value: TournamentMode[key as keyof typeof TournamentMode],
+      label: key,
+    }));
 
   constructor(
     private repository: TournamentRepository,
@@ -62,6 +69,10 @@ export class AddEditComponent implements OnInit {
 
   get isNameValid(): boolean {
     return isNotEmpty(this.tournament.name ?? "");
+  }
+
+  get isModeValid(): boolean {
+    return this.tournament.mode !== null && this.tournament.mode !== undefined;
   }
 
   get isParticipantValid(): boolean {
@@ -127,27 +138,27 @@ export class AddEditComponent implements OnInit {
   #generateTournament() {
     const { length } = this.tournament.participants;
     if (!this.hasBeenRemoved && this.count === length) return;
-    if (length === 16) {
-      this.tournament.rounds.push(this.#generateRound(8));
-      this.tournament.rounds.push(this.#generateEmptyRound(4));
-    } else if (length === 8) {
-      this.tournament.rounds.push([]);
-      this.tournament.rounds.push(this.#generateRound(4));
-    }
-    this.tournament.rounds.push(this.#generateEmptyRound(2));
-    this.tournament.rounds.push(this.#generateEmptyRound(1));
+    // if (length === 16) {
+    //   this.tournament.rounds.push(this.#generateRound(8));
+    //   this.tournament.rounds.push(this.#generateEmptyRound(4));
+    // } else if (length === 8) {
+    //   this.tournament.rounds.push([]);
+    //   this.tournament.rounds.push(this.#generateRound(4));
+    // }
+    // this.tournament.rounds.push(this.#generateEmptyRound(2));
+    // this.tournament.rounds.push(this.#generateEmptyRound(1));
   }
 
   #generateRound(count: number) {
-    let jump = 0;
-    return Array.from({ length: count }, (_, i) => {
-      const index = jump++ + i;
-      return { p1: this.tournament.participants[index].id, p2: this.tournament.participants[index + 1].id, won: "", lost: "", diff: 0 } as Match
-    });
+    // let jump = 0;
+    // return Array.from({ length: count }, (_, i) => {
+    //   const index = jump++ + i;
+    //   return { p1: this.tournament.participants[index].id, p2: this.tournament.participants[index + 1].id, games: [], won: "", lost: "", diff: 0 } as Match
+    // });
   }
 
   #generateEmptyRound(count: number) {
-    return Array.from({ length: count }, (_) => ({ p1: "", p2: "", won: "", lost: "", diff: 0 } as Match));
+    // return Array.from({ length: count }, (_) => ({ p1: "", p2: "", games: [], won: "", lost: "", diff: 0 } as Match));
   }
 }
 

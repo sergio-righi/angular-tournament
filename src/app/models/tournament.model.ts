@@ -1,6 +1,7 @@
 import { Match } from "./match.model";
 import { Participant } from "./participant.model";
 import { TournamentMode } from "app/utils";
+import { Round } from "./round.model";
 
 export class Tournament {
   static default = {
@@ -23,7 +24,7 @@ export class Tournament {
     public mode: TournamentMode,
     public description: string,
     public participants: Participant[],
-    public rounds: Match[][],
+    public rounds: Round[],
     public startedAt: string,
     public owner: string,
     public createdAt: number = Date.now(),

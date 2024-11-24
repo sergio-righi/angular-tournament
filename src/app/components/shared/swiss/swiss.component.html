@@ -10,7 +10,7 @@
             [class.c-pointer]="!readonly"
             [class.pointer-events-none]="readonly"
             (click)="openManageGamesModal(i, j)"
-            *ngFor="let match of round; let j = index"
+            *ngFor="let match of round.matches; let j = index"
           >
             <div class="wrapper">
               <div

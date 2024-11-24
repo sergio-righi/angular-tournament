@@ -7,7 +7,9 @@ import { TournamentRepository } from "./tournament.repository";
 import { UserRepository } from "./user.repository";
 
 @NgModule({
-  imports: [HttpClientModule],
+  imports: [
+    HttpClientModule,
+  ],
   providers: [AuthService, RestService, LocaleService, TournamentRepository, UserRepository],
 })
 export class ModelModule { }

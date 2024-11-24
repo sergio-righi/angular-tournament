@@ -27,13 +27,13 @@
 
       <!-- begin form -->
       <form #form="ngForm" (ngSubmit)="save(form)">
-        <div class="form-group">
-          <input type="hidden" name="id" [(ngModel)]="tournament.id" />
-        </div>
+        <input type="hidden" name="id" [(ngModel)]="tournament.id" />
 
         <!-- begin name field -->
         <div class="form-group">
-          <label for="nameTextField">{{ locale.t.label.title }} *</label>
+          <label for="nameTextField" class="form-label">
+            {{ locale.t.label.title }} *
+          </label>
           <input
             type="text"
             name="item"
@@ -51,14 +51,44 @@
           </div>
         </div>
         <!-- end name validation -->
-
         <!-- end name -->
+
+        <br />
+
+        <!-- begin mode dropdown -->
+        <div class="form-group">
+          <label for="modeDropdown" class="form-label">
+            {{ locale.t.label.mode }}
+          </label>
+          <select
+            id="modeDropdown"
+            name="mode"
+            class="form-control"
+            [(ngModel)]="tournament.mode"
+            required
+          >
+            <option *ngFor="let mode of tournamentModes" [value]="mode.value">
+              {{ mode.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- begin mode validation -->
+        <div *ngIf="isSubmitted" class="text-danger">
+          <div [hidden]="isModeValid">
+            {{ locale.t.message.required_field }}
+          </div>
+        </div>
+        <!-- end mode validation -->
+        <!-- end mode -->
 
         <br />
 
         <!-- begin description field -->
         <div class="form-group">
-          <label for="descTextField">{{ locale.t.label.description }}</label>
+          <label for="descTextField" class="form-label">
+            {{ locale.t.label.description }}
+          </label>
           <textarea
             type="text"
             id="descTextField"
@@ -70,7 +100,9 @@
           </textarea>
         </div>
         <!-- end description -->
+
         <br />
+
         <!-- begin participants -->
         <!-- participants control -->
         <div class="form-group mb-4">
@@ -123,14 +155,15 @@
           </div>
         </div>
         <!-- end participants validation -->
-
         <!-- end participants -->
+
         <br />
+
         <!-- start date field -->
         <div class="form-group">
-          <label for="startedAtTextField">{{
-            locale.t.label.start_date
-          }}</label>
+          <label for="startedAtTextField" class="form-label">
+            {{ locale.t.label.start_date }}
+          </label>
           <input
             required
             type="date"
@@ -148,8 +181,8 @@
           </div>
         </div>
         <!-- end start date validation -->
-
         <!-- end start date -->
+
         <br />
 
         <!-- completed field -->
@@ -185,13 +218,13 @@
         <br />
 
         <!-- begin actions -->
-        <button class="btn btn-primary">
-          <i class="fa-solid fa-pen-to-square"></i>
+        <button class="btn btn-primary btn-sm">
           {{ locale.t.action.submit }}
         </button>
-        <span>&nbsp;</span>
-        <a [routerLink]="['/tournament', 'list']" class="btn btn-secondary">
-          <i class="fa-solid fa-rotate-left"></i>
+        <a
+          [routerLink]="['/tournament', 'list']"
+          class="btn btn-secondary btn-sm ms-2"
+        >
           {{ locale.t.action.cancel }}
         </a>
         <!-- end actions -->
