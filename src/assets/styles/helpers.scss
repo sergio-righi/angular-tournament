@@ -5,3 +5,9 @@
 .c-pointer {
   cursor: pointer;
 }
+
+th.fit-content,
+td.fit-content {
+  width: 1px;
+  white-space: nowrap;
+}
