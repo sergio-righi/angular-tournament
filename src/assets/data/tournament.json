@@ -1,85 +1,85 @@
 [
   {
     "id": "67437e830e5a000bc219c158",
-    "name": "My Custom Tournament",
+    "name": "RMR - European B",
     "mode": 2,
     "description": "",
     "participants": [
       {
         "id": "67437e5e0e5a000bc219c148",
-        "name": "A"
+        "name": "G2"
       },
       {
         "id": "67437e5e0e5a000bc219c149",
-        "name": "B"
+        "name": "Team Spirit"
       },
       {
         "id": "67437e5e0e5a000bc219c14a",
-        "name": "C"
+        "name": "Eternal Fire"
       },
       {
         "id": "67437e5e0e5a000bc219c14b",
-        "name": "D"
+        "name": "Virtus Pro"
       },
       {
         "id": "67437e5e0e5a000bc219c14c",
-        "name": "E"
+        "name": "Heroic"
       },
       {
         "id": "67437e5e0e5a000bc219c14d",
-        "name": "F"
+        "name": "Astralis"
       },
       {
         "id": "67437e5e0e5a000bc219c14e",
-        "name": "G"
+        "name": "BIG"
       },
       {
         "id": "67437e5e0e5a000bc219c14f",
-        "name": "H"
+        "name": "3DMax"
       },
       {
         "id": "67437e600e5a000bc219c150",
-        "name": "I"
+        "name": "NiP"
       },
       {
         "id": "67437e600e5a000bc219c151",
-        "name": "J"
+        "name": "B8"
       },
       {
         "id": "67437e600e5a000bc219c152",
-        "name": "K"
+        "name": "Aurora"
       },
       {
         "id": "67437e600e5a000bc219c153",
-        "name": "L"
+        "name": "Passion UA"
       },
       {
         "id": "67437e600e5a000bc219c154",
-        "name": "M"
+        "name": "PARAVISION"
       },
       {
         "id": "67437e600e5a000bc219c155",
-        "name": "N"
+        "name": "9Pandas"
       },
       {
         "id": "67437e600e5a000bc219c156",
-        "name": "O"
+        "name": "sashi Esport"
       },
       {
         "id": "67437e600e5a000bc219c157",
-        "name": "P"
+        "name": "TSM"
       }
     ],
     "rounds": [
       {
         "id": "67437e830e5a000bc219c159",
         "index": 0,
-        "format": 2,
+        "format": 1,
         "matches": [
           {
             "p1": "67437e5e0e5a000bc219c148",
             "p2": "67437e600e5a000bc219c150",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -88,7 +88,7 @@
           {
             "p1": "67437e5e0e5a000bc219c149",
             "p2": "67437e600e5a000bc219c151",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -97,7 +97,7 @@
           {
             "p1": "67437e5e0e5a000bc219c14a",
             "p2": "67437e600e5a000bc219c152",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -106,7 +106,7 @@
           {
             "p1": "67437e5e0e5a000bc219c14b",
             "p2": "67437e600e5a000bc219c153",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -115,7 +115,7 @@
           {
             "p1": "67437e5e0e5a000bc219c14c",
             "p2": "67437e600e5a000bc219c154",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -124,7 +124,7 @@
           {
             "p1": "67437e5e0e5a000bc219c14d",
             "p2": "67437e600e5a000bc219c155",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -133,7 +133,7 @@
           {
             "p1": "67437e5e0e5a000bc219c14e",
             "p2": "67437e600e5a000bc219c156",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -142,7 +142,7 @@
           {
             "p1": "67437e5e0e5a000bc219c14f",
             "p2": "67437e600e5a000bc219c157",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -153,12 +153,12 @@
       {
         "id": "67437e830e5a000bc219c15a",
         "index": 1,
-        "format": 2,
+        "format": 1,
         "matches": [
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -167,7 +167,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -176,7 +176,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -185,7 +185,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -194,7 +194,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -203,7 +203,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -212,7 +212,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -221,7 +221,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -232,12 +232,12 @@
       {
         "id": "67437e830e5a000bc219c15b",
         "index": 2,
-        "format": 2,
+        "format": 3,
         "matches": [
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -246,7 +246,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -255,7 +255,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -264,7 +264,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -273,7 +273,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -282,7 +282,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -291,7 +291,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -300,7 +300,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 2,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -311,12 +311,12 @@
       {
         "id": "67437e830e5a000bc219c15c",
         "index": 3,
-        "format": 1,
+        "format": 3,
         "matches": [
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -325,7 +325,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -334,7 +334,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -343,7 +343,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -352,7 +352,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -361,7 +361,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -372,12 +372,12 @@
       {
         "id": "67437e830e5a000bc219c15d",
         "index": 4,
-        "format": 1,
+        "format": 3,
         "matches": [
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -386,7 +386,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -395,7 +395,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -412,53 +412,53 @@
   },
   {
     "id": "67437ea2e3909ff68a00249b",
-    "name": "My Custom Tournament",
+    "name": "RMR - European A",
     "mode": 2,
     "description": "",
     "participants": [
       {
         "id": "67437e9ae3909ff68a002493",
-        "name": "A"
+        "name": "Natus Vincere"
       },
       {
         "id": "67437e9ae3909ff68a002494",
-        "name": "B"
+        "name": "Team Vitality"
       },
       {
         "id": "67437e9ae3909ff68a002495",
-        "name": "C"
+        "name": "Mouz"
       },
       {
         "id": "67437e9ae3909ff68a002496",
-        "name": "D"
+        "name": "FaZe Clan"
       },
       {
         "id": "67437e9ae3909ff68a002497",
-        "name": "E"
+        "name": "Cloud9"
       },
       {
         "id": "67437e9ae3909ff68a002498",
-        "name": "F"
+        "name": "Team Falcons"
       },
       {
         "id": "67437e9ae3909ff68a002499",
-        "name": "G"
+        "name": "Fnatic"
       },
       {
         "id": "67437e9ae3909ff68a00249a",
-        "name": "H"
+        "name": "Gamer Legion"
       }
     ],
     "rounds": [
       {
         "id": "67437ea2e3909ff68a00249c",
         "index": 0,
-        "format": 2,
+        "format": 1,
         "matches": [
           {
             "p1": "67437e9ae3909ff68a002493",
             "p2": "67437e9ae3909ff68a002497",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -467,7 +467,7 @@
           {
             "p1": "67437e9ae3909ff68a002494",
             "p2": "67437e9ae3909ff68a002498",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -476,7 +476,7 @@
           {
             "p1": "67437e9ae3909ff68a002495",
             "p2": "67437e9ae3909ff68a002499",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -485,7 +485,7 @@
           {
             "p1": "67437e9ae3909ff68a002496",
             "p2": "67437e9ae3909ff68a00249a",
-            "format": 2,
+            "format": 1,
             "games": [],
             "won": "",
             "lost": "",
@@ -496,12 +496,12 @@
       {
         "id": "67437ea2e3909ff68a00249d",
         "index": 1,
-        "format": 1,
+        "format": 3,
         "matches": [
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -510,7 +510,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -519,7 +519,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -528,7 +528,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -539,12 +539,12 @@
       {
         "id": "67437ea2e3909ff68a00249e",
         "index": 2,
-        "format": 1,
+        "format": 3,
         "matches": [
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -553,7 +553,7 @@
           {
             "p1": "",
             "p2": "",
-            "format": 1,
+            "format": 3,
             "games": [],
             "won": "",
             "lost": "",
@@ -570,41 +570,41 @@
   },
   {
     "id": "67437fb94cbf00599cb200d3",
-    "name": "My Custom Tournament",
+    "name": "Champions League 2024-25",
     "mode": 1,
     "description": "",
     "participants": [
       {
         "id": "67437fb04cbf00599cb200cb",
-        "name": "A"
+        "name": "Liverpool"
       },
       {
         "id": "67437fb04cbf00599cb200cc",
-        "name": "B"
+        "name": "Sporting"
       },
       {
         "id": "67437fb04cbf00599cb200cd",
-        "name": "C"
+        "name": "Monaco"
       },
       {
         "id": "67437fb04cbf00599cb200ce",
-        "name": "D"
+        "name": "Brest"
       },
       {
         "id": "67437fb04cbf00599cb200cf",
-        "name": "E"
+        "name": "Inter Milan"
       },
       {
         "id": "67437fb04cbf00599cb200d0",
-        "name": "F"
+        "name": "Barcelona"
       },
       {
         "id": "67437fb04cbf00599cb200d1",
-        "name": "G"
+        "name": "Borussia Dortmund"
       },
       {
         "id": "67437fb04cbf00599cb200d2",
-        "name": "H"
+        "name": "Aston Villa"
       }
     ],
     "rounds": [
@@ -701,73 +701,73 @@
   },
   {
     "id": "67437fe06a9dd626c39c9845",
-    "name": "My Custom Tournament",
+    "name": "Champions League 2023-24",
     "mode": 1,
     "description": "",
     "participants": [
       {
         "id": "67437fd16a9dd626c39c9835",
-        "name": "A"
+        "name": "Inter Milan"
       },
       {
         "id": "67437fd16a9dd626c39c9836",
-        "name": "B"
+        "name": "Atlético Madrid"
       },
       {
         "id": "67437fd16a9dd626c39c9837",
-        "name": "C"
+        "name": "PSV Eindhoven"
       },
       {
         "id": "67437fd16a9dd626c39c9838",
-        "name": "D"
+        "name": "Borussia Dortmund"
       },
       {
         "id": "67437fd16a9dd626c39c9839",
-        "name": "E"
+        "name": "Paris Saint-Germain"
       },
       {
         "id": "67437fd16a9dd626c39c983a",
-        "name": "F"
+        "name": "Real Sociedad"
       },
       {
         "id": "67437fd16a9dd626c39c983b",
-        "name": "G"
+        "name": "Napoli"
       },
       {
         "id": "67437fd16a9dd626c39c983c",
-        "name": "H"
+        "name": "Barcelona"
       },
       {
         "id": "67437fd26a9dd626c39c983d",
-        "name": "I"
+        "name": "Porto"
       },
       {
         "id": "67437fd26a9dd626c39c983e",
-        "name": "J"
+        "name": "Arsenal"
       },
       {
         "id": "67437fd26a9dd626c39c983f",
-        "name": "K"
+        "name": "Lazio"
       },
       {
         "id": "67437fd26a9dd626c39c9840",
-        "name": "L"
+        "name": "Bayern Munich"
       },
       {
         "id": "67437fd26a9dd626c39c9841",
-        "name": "M"
+        "name": "RB Leipzig"
       },
       {
         "id": "67437fd26a9dd626c39c9842",
-        "name": "N"
+        "name": "Real Madrid"
       },
       {
         "id": "67437fd26a9dd626c39c9843",
-        "name": "O"
+        "name": "Copenhagen"
       },
       {
         "id": "67437fd26a9dd626c39c9844",
-        "name": "P"
+        "name": "Manchester City"
       }
     ],
     "rounds": [

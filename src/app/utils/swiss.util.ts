@@ -1,3 +1,5 @@
+import { Round } from "app/models/round.model";
+
 type ParticipantData = {
   seed: number;
   wins: number;
@@ -14,8 +16,8 @@ type MatchResult = {
 };
 
 type Match = {
-  player1: string;
-  player2: string;
+  p1: string;
+  p2: string;
 };
 
 type Standings = {
@@ -33,7 +35,6 @@ export class SwissTournament {
   rounds: Match[][];
   results: MatchResult[];
   breakpoint: number;
-  standings: Standings[];
 
   constructor(participants: string[], slots: number) {
     this.participants = Object.fromEntries(
@@ -52,7 +53,6 @@ export class SwissTournament {
     this.slots = slots;
     this.rounds = [];
     this.results = [];
-    this.standings = [];
     this.breakpoint =
       Math.ceil(Math.log2(Object.keys(this.participants).length)) - 1;
   }
@@ -96,32 +96,31 @@ export class SwissTournament {
     if (this.rounds.length === 0) return;
     console.log(
       this.rounds[this.rounds.length - 1].map(
-        (item) => `${item.player1} vs ${item.player2}`
+        (item) => `${item.p1} vs ${item.p2}`
       )
     );
   }
 
-  generateDecisionRound(): void {
-    const participants = this.sortParticipants();
-    if (participants.length % 2 === 0 && this.slots % 2 === 0) return;
+  // generateDecisionRound(): void {
+  //   const participants = this.sortParticipants();
+  //   if (participants.length % 2 === 0 && this.slots % 2 === 0) return;
 
-    console.log("-------- Decision Round --------");
-    this.rounds.push([
-      {
-        player1: participants[this.slots - 1].name,
-        player2: participants[this.slots].name,
-      },
-    ]);
-    this.printRound();
-    this.simulateRound(true);
-  }
+  //   console.log("-------- Decision Round --------");
+  //   this.rounds.push([
+  //     {
+  //       p1: participants[this.slots - 1].name,
+  //       p2: participants[this.slots].name,
+  //     },
+  //   ]);
+  //   this.printRound();
+  // }
 
-  generateRound(): void {
+  generateRound(): Match[] {
     const participants = this.filterParticipants();
-    if (participants.length < 2) return;
+    if (participants.length < 2) return [];
 
     console.log(`-------- Round ${this.rounds.length + 1} --------`);
-    const round: Match[] = [];
+    const matches: Match[] = [];
     const slices = this.sliceArray(participants);
 
     for (const slice of slices) {
@@ -130,30 +129,30 @@ export class SwissTournament {
       if (this.rounds.length === 0) {
         const middle = Math.floor(length / 2);
         for (let i = 0; i < middle; i++) {
-          round.push({
-            player1: slice[i].name,
-            player2: slice[middle + i].name,
+          matches.push({
+            p1: slice[i].name,
+            p2: slice[middle + i].name,
           });
         }
       } else {
         const unpaired = [...slice];
         while (unpaired.length > 1) {
-          const player1 = unpaired[0];
-          let player2Index = unpaired.length - 1;
+          const p1 = unpaired[0];
+          let p2Index = unpaired.length - 1;
 
           while (
-            player2Index > 0 &&
-            this.participants[player1.name].opponents.includes(
-              unpaired[player2Index].name
+            p2Index > 0 &&
+            this.participants[p1.name].opponents.includes(
+              unpaired[p2Index].name
             )
           ) {
-            player2Index--;
+            p2Index--;
           }
 
-          if (player2Index > 0) {
-            const player2 = unpaired[player2Index];
-            round.push({ player1: player1.name, player2: player2.name });
-            unpaired.splice(player2Index, 1);
+          if (p2Index > 0) {
+            const p2 = unpaired[p2Index];
+            matches.push({ p1: p1.name, p2: p2.name });
+            unpaired.splice(p2Index, 1);
             unpaired.shift();
           } else {
             unpaired.shift();
@@ -162,7 +161,8 @@ export class SwissTournament {
       }
     }
 
-    this.rounds.push(round);
+    this.rounds.push(matches);
+    return matches;
   }
 
   calculateBuchholz(): void {
@@ -213,32 +213,32 @@ export class SwissTournament {
     }));
   }
 
-  simulateRound(isDecision: boolean): void {
-    const roundResults = this.rounds[this.rounds.length - 1].map(
-      ({ player1, player2 }) => {
-        const winner = Math.random() > 0.5 ? player1 : player2;
-        const loser = winner === player1 ? player2 : player1;
-        const diff = Math.floor(Math.random() * 10);
-        return { won: winner, lost: loser, diff };
-      }
-    );
+  // simulateRound(isDecision: boolean): void {
+  //   const roundResults = this.rounds[this.rounds.length - 1].map(
+  //     ({ p1, p2 }) => {
+  //       const winner = Math.random() > 0.5 ? p1 : p2;
+  //       const loser = winner === p1 ? p2 : p1;
+  //       const diff = Math.floor(Math.random() * 10);
+  //       return { won: winner, lost: loser, diff };
+  //     }
+  //   );
 
-    if (!isDecision) this.processResults(roundResults);
-    else console.log(`-------- Winner ${roundResults[0].won} --------`);
-  }
+  //   if (!isDecision) this.processResults(roundResults);
+  //   else console.log(`-------- Winner ${roundResults[0].won} --------`);
+  // }
 
-  simulateTournament(results?: any): void {
-    while (this.checkEndCondition()) {
-      this.generateRound();
-      this.printRound();
-      if (!results) this.simulateRound(false);
-      else {
-        const result = results[this.rounds.length - 1] as any;
-        if (result) this.processResults(result);
-        else this.simulateRound(false);
-      }
-      this.standings = this.generateStandings();
-    }
-    this.generateDecisionRound();
-  }
+  // simulateTournament(results?: any): void {
+  //   while (this.checkEndCondition()) {
+  //     this.generateRound();
+  //     this.printRound();
+  //     if (!results) this.simulateRound(false);
+  //     else {
+  //       const result = results[this.rounds.length - 1] as any;
+  //       if (result) this.processResults(result);
+  //       else this.simulateRound(false);
+  //     }
+  //     this.standings = this.generateStandings();
+  //   }
+  //   this.generateDecisionRound();
+  // }
 }

@@ -85,28 +85,56 @@ export abstract class BaseTournamentComponent implements OnInit {
       const currentMatch = this.rounds[this.selectedRound].matches[this.selectedMatch];
       currentMatch.games = [...this.currentGames];
 
-      let p1Score = 0;
-      let p2Score = 0;
-      let hasTiebreaker = false;
+      let p1Wins = 0;
+      let p2Wins = 0;
 
+      let p1Tiebreaker = 0;
+      let p2Tiebreaker = 0;
+
+      // Calculate the number of games each player has won
       currentMatch.games.forEach((game: Game) => {
-        if (game.tiebreaker) {
-          p1Score += game.tiebreaker.p1;
-          p2Score += game.tiebreaker.p2;
-          hasTiebreaker = true;
-        } else if (!hasTiebreaker) {
-          p1Score += game.p1;
-          p2Score += game.p2;
+        let p1Score = game.p1;
+        let p2Score = game.p2;
+
+        if (p1Score > p2Score) {
+          p1Wins++;
+        } else if (p2Score > p1Score) {
+          p2Wins++;
         }
       });
 
-      if (p1Score > p2Score) {
-        currentMatch.won = currentMatch.p1;
-        currentMatch.lost = currentMatch.p2;
-      } else if (p1Score < p2Score) {
-        currentMatch.won = currentMatch.p2;
-        currentMatch.lost = currentMatch.p1;
+      // Calculate total score difference
+      const p1Score = currentMatch.games.reduce((sum, game) => sum + game.p1, 0);
+      const p2Score = currentMatch.games.reduce((sum, game) => sum + game.p2, 0);
+
+      const lastMatch = currentMatch.games[currentMatch.games.length - 1];
+      if (lastMatch.tiebreaker) {
+        p1Tiebreaker = lastMatch.tiebreaker.p1;
+        p2Tiebreaker = lastMatch.tiebreaker.p2;
+      }
+
+      // Determine the required number of wins
+      const requiredWins = Math.floor(currentMatch.format / 2 + 1);
+
+      // Decide the match outcome based on the format and wins
+      if (currentMatch.format % 2 === 0 && currentMatch.games.length === requiredWins) {
+        if (p1Score > p2Score || p1Tiebreaker > p2Tiebreaker) {
+          currentMatch.won = currentMatch.p1;
+          currentMatch.lost = currentMatch.p2;
+        } else if (p2Score > p1Score || p2Tiebreaker > p1Tiebreaker) {
+          currentMatch.won = currentMatch.p2;
+          currentMatch.lost = currentMatch.p1;
+        }
+      } else if (p1Wins === requiredWins || p2Wins === requiredWins) {
+        if (p1Wins > p2Wins || p1Tiebreaker > p2Tiebreaker) {
+          currentMatch.won = currentMatch.p1;
+          currentMatch.lost = currentMatch.p2;
+        } else if (p2Wins > p1Wins || p2Tiebreaker > p1Tiebreaker) {
+          currentMatch.won = currentMatch.p2;
+          currentMatch.lost = currentMatch.p1;
+        }
       } else {
+        // Winner cannot be determined yet
         currentMatch.won = '';
         currentMatch.lost = '';
       }
@@ -115,6 +143,7 @@ export abstract class BaseTournamentComponent implements OnInit {
 
       callback && callback(currentMatch);
     }
+
     this.closeManageGamesModal();
   }
 }
