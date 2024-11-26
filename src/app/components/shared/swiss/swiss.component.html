@@ -48,100 +48,29 @@
 <!-- end main content -->
 
 <!-- begin fab -->
-<app-fab icon="fa fa-table" (onClick)="openStandingsModal()"></app-fab>
+<app-fab icon="fa fa-table" (onClick)="openOverviewModal()"></app-fab>
 <!-- end fab -->
 
 <!-- begin standings modal -->
-<app-modal
+<app-overview-modal
   [header]="locale.t.header.standings"
-  [show]="isStandingsModalVisible"
-  (close)="closeStandingsModal()"
->
-  <div modal-body>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th class="text-center fit-content">#</th>
-          <th>Team</th>
-          <th class="text-center">Matches</th>
-          <th class="text-center">Rounds</th>
-          <th class="text-center">RD</th>
-          <th class="text-center">BU</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of standings; let i = index">
-          <th class="t-col-fit text-center">{{ i + 1 }}</th>
-          <td>
-            {{ getParticipant(item.name) }}
-          </td>
-          <td class="text-center">{{ item.wins }}-{{ item.losses }}</td>
-          <td class="text-center">
-            {{ getScore(item.name).won }} - {{ getScore(item.name).lost }}
-          </td>
-          <td class="text-center">{{ item.diff }}</td>
-          <td class="text-center">{{ item.buchholz }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</app-modal>
+  [isOverviewModalVisible]="isOverviewModalVisible"
+  [participants]="participants"
+  [data]="standings"
+  [mode]="mode"
+  (close)="closeOverviewModal()"
+></app-overview-modal>
 <!-- end standings modal -->
 
 <!-- begin manage modal -->
-<app-modal
-  [header]="gameHeader"
-  [show]="isManageGamesModalVisible"
+<app-manage-game-modal
+  [selectedRound]="selectedRound"
+  [selectedMatch]="selectedMatch"
+  [games]="games"
+  [isModalVisible]="isModalVisible"
+  [participants]="participants"
+  [rounds]="rounds"
+  [mode]="mode"
   (close)="closeManageGamesModal()"
->
-  <div modal-body>
-    <ul class="list-group mb-3">
-      <li
-        *ngFor="let game of currentGames; let i = index"
-        class="list-group-item"
-      >
-        <div class="d-flex flex-column">
-          <!-- Label Row -->
-          <div class="mb-2">
-            <strong>{{ locale.t.label.game }} {{ i + 1 }}</strong>
-          </div>
-          <!-- Inputs and Button Row -->
-          <div class="d-flex align-items-center justify-content-between">
-            <!-- Inputs -->
-            <div class="d-flex gap-2 flex-grow-1">
-              <input
-                type="number"
-                [(ngModel)]="game.p1"
-                class="form-control"
-                placeholder="Player 1"
-              />
-              <input
-                type="number"
-                [(ngModel)]="game.p2"
-                class="form-control"
-                placeholder="Player 2"
-              />
-            </div>
-            <!-- Button -->
-            <button class="btn btn-danger ms-3" (click)="removeGame(i)">
-              {{ locale.t.action.delete }}
-            </button>
-          </div>
-        </div>
-      </li>
-      <li *ngIf="currentGames.length === 0" class="list-group-item">
-        {{ locale.t.message.no_games_have_been_recorded }}
-      </li>
-    </ul>
-  </div>
-
-  <div modal-footer>
-    <button class="btn btn-secondary btn-sm" (click)="addGame()">
-      {{ locale.t.action.add }}
-    </button>
-    <button class="btn btn-primary btn-sm ms-2" (click)="saveGames()">
-      {{ locale.t.action.save }}
-    </button>
-  </div>
-</app-modal>
+></app-manage-game-modal>
 <!-- end manage modal -->

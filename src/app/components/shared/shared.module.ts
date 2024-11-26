@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BracketComponent } from './bracket';
 import { FabComponent } from './fab';
 import { FeedbackComponent } from './feedback';
-import { ModalComponent } from './modal';
+import { ModalComponent, ModalGameComponent, ModalOverviewComponent } from './modal';
 import { NoRecordComponent, LoadingComponent } from './placeholder';
 import { SwissComponent } from './swiss';
 
@@ -22,6 +22,8 @@ import { SwissComponent } from './swiss';
     FeedbackComponent,
     LoadingComponent,
     ModalComponent,
+    ModalGameComponent,
+    ModalOverviewComponent,
     NoRecordComponent,
     SwissComponent,
   ],
@@ -31,6 +33,8 @@ import { SwissComponent } from './swiss';
     FeedbackComponent,
     LoadingComponent,
     ModalComponent,
+    ModalGameComponent,
+    ModalOverviewComponent,
     NoRecordComponent,
     SwissComponent,
     CommonModule,

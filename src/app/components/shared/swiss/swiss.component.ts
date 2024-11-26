@@ -14,7 +14,7 @@ import { Round } from 'app/models/round.model';
 })
 export class SwissComponent extends BaseTournamentComponent {
   currentRound: number = 0;
-  isStandingsModalVisible: boolean = false; // Show the modal when managing games
+  isOverviewModalVisible: boolean = false; // Show the modal when managing games
   standings: Standings[] = [];
   controller!: SwissTournament;
 
@@ -65,29 +65,6 @@ export class SwissComponent extends BaseTournamentComponent {
     }
   }
 
-  // Method to calculate total scores
-  getScore(participant: string) {
-    let won = 0, lost = 0;
-
-    // Iterate through each round
-    for (const round of this.rounds) {
-      // Iterate through each match in the round
-      for (const match of round.matches) {
-        if (match.p1 === participant) {
-          // Add scores for p1
-          won += match.games.reduce((acc: number, game: Game) => acc + game.p1, 0);
-          lost += match.games.reduce((acc: number, game: Game) => acc + game.p2, 0);
-        } else if (match.p2 === participant) {
-          // Add scores for p2
-          won += match.games.reduce((acc: number, game: Game) => acc + game.p2, 0);
-          lost += match.games.reduce((acc: number, game: Game) => acc + game.p1, 0);
-        }
-      }
-    }
-
-    return { won, lost };
-  }
-
   getMatches(rounds: Round[]): Match[][] {
     return rounds.reduce((acc: Match[][], round: Round) => {
       acc.push(round.matches); // Add each round's matches array to the accumulator
@@ -95,12 +72,12 @@ export class SwissComponent extends BaseTournamentComponent {
     }, []);
   }
 
-  openStandingsModal(): void {
+  openOverviewModal(): void {
     this.standings = this.controller.generateStandings();
-    this.isStandingsModalVisible = true;
+    this.isOverviewModalVisible = true;
   }
 
-  closeStandingsModal(): void {
-    this.isStandingsModalVisible = false;
+  closeOverviewModal(): void {
+    this.isOverviewModalVisible = false;
   }
 }

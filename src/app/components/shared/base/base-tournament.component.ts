@@ -3,20 +3,21 @@ import { Game } from 'app/models/game.model';
 import { Round } from 'app/models/round.model';
 import { LocaleService } from 'app/models/locale.service';
 import { Directive } from '@angular/core';
-import { Match } from 'app/models';
+import { TournamentMode } from 'app/utils';
 
 @Directive({
   selector: '[appBaseTournament]'
 })
 export abstract class BaseTournamentComponent implements OnInit {
   @Input() readonly: boolean = false;
+  @Input() mode: TournamentMode = TournamentMode.Knockout;
   @Input() rounds: Round[] = [];
   @Input() participants: { [id: string]: string } = {};
 
-  isManageGamesModalVisible: boolean = false;
+  isModalVisible: boolean = false;
   selectedRound: number = -1;
   selectedMatch: number = -1;
-  currentGames: Game[] = [];
+  games: Game[] = [];
 
   constructor(public locale: LocaleService) { }
 
@@ -35,7 +36,7 @@ export abstract class BaseTournamentComponent implements OnInit {
   }
 
   get hasTiebreaker(): boolean {
-    return this.currentGames.length > 0 && this.currentGames[this.currentGames.length - 1].tiebreaker !== undefined;
+    return this.games.length > 0 && this.games[this.games.length - 1].tiebreaker !== undefined;
   }
 
   getParticipant(id: string): string {
@@ -51,18 +52,18 @@ export abstract class BaseTournamentComponent implements OnInit {
   openManageGamesModal(round: number, match: number): void {
     this.selectedRound = round;
     this.selectedMatch = match;
-    this.currentGames = [...this.rounds[this.selectedRound].matches[match].games];
-    this.isManageGamesModalVisible = true;
+    this.games = [...this.rounds[this.selectedRound].matches[match].games];
+    this.isModalVisible = true;
   }
 
   closeManageGamesModal(): void {
     this.selectedRound = -1;
     this.selectedMatch = -1;
-    this.isManageGamesModalVisible = false;
+    this.isModalVisible = false;
   }
 
   toggleTiebreaker(index: number): void {
-    const game = this.currentGames[index];
+    const game = this.games[index];
     if (game.tiebreaker) {
       // Remove tiebreaker
       delete game.tiebreaker;
@@ -73,17 +74,17 @@ export abstract class BaseTournamentComponent implements OnInit {
   }
 
   addGame(): void {
-    this.currentGames.push({ p1: 0, p2: 0 });
+    this.games.push({ p1: 0, p2: 0 });
   }
 
   removeGame(index: number): void {
-    this.currentGames.splice(index, 1);
+    this.games.splice(index, 1);
   }
 
   saveGames(callback?: Function): void {
     if (this.selectedRound >= 0 && this.selectedMatch >= 0) {
       const currentMatch = this.rounds[this.selectedRound].matches[this.selectedMatch];
-      currentMatch.games = [...this.currentGames];
+      currentMatch.games = [...this.games];
 
       let p1Wins = 0;
       let p2Wins = 0;

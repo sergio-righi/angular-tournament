@@ -1,0 +1,85 @@
+<!-- begin main content -->
+<app-modal
+  [header]="header"
+  [show]="isOverviewModalVisible"
+  (close)="closeModal()"
+>
+  <div modal-body>
+    <ng-container *ngIf="isKnockout">
+      <table class="table table-bordered" *ngFor="let round of data">
+        <thead>
+          <tr>
+            <th class="text-center">{{ locale.t.label.match }}</th>
+            <th colspan="2" class="text-center">
+              {{ getRoundName(round.matches) }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let match of round.matches; let i = index">
+            <!-- Match row -->
+            <tr>
+              <th class="t-col-fit text-center">#{{ i + 1 }}</th>
+              <td
+                class="text-center"
+                [class.table-primary]="match.won && match.p1 === match.won"
+              >
+                {{ getParticipant(match.p1) }}
+              </td>
+              <td
+                class="text-center"
+                [class.table-primary]="match.won && match.p2 === match.won"
+              >
+                {{ getParticipant(match.p2) }}
+              </td>
+            </tr>
+
+            <!-- Games row -->
+            <tr *ngIf="match.games && match.games.length > 0">
+              <td colspan="3" class="text-center bg-light">
+                <div
+                  class="d-inline-flex justify-content-center align-items-center mb-2"
+                  *ngFor="let game of match.games; let j = index"
+                >
+                  <span class="badge bg-secondary me-2">
+                    {{ locale.t.label.game }} {{ j + 1 }}
+                  </span>
+                  <span class="me-2">{{ getGame(game) }}</span>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </ng-container>
+    <ng-container *ngIf="isSwiss">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center fit-content">#</th>
+            <th>Team</th>
+            <th class="text-center">Matches</th>
+            <th class="text-center">Rounds</th>
+            <th class="text-center">RD</th>
+            <th class="text-center">BU</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data; let i = index">
+            <th class="t-col-fit text-center">{{ i + 1 }}</th>
+            <td>
+              {{ getParticipant(item.name) }}
+            </td>
+            <td class="text-center">{{ item.wins }}-{{ item.losses }}</td>
+            <td class="text-center">
+              {{ getScore(item.name).won }} - {{ getScore(item.name).lost }}
+            </td>
+            <td class="text-center">{{ item.diff }}</td>
+            <td class="text-center">{{ item.buchholz }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+</app-modal>
+<!-- end main content -->

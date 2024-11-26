@@ -67,6 +67,8 @@
     "last_name": "e.g. Smith, Doe",
     "participant": "e.g. Jane, John",
     "password": "Enter your password",
+    "player_one": "Player One",
+    "player_two": "Player Two",
     "title": "e.g. Tournament Y, Tournament Z",
     "username": "Enter your username"
   },

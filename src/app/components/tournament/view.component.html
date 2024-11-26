@@ -38,6 +38,7 @@
       <app-bracket
         *ngIf="tournament.mode === tournamentMode.Knockout"
         [readonly]="isReadOnly"
+        [mode]="tournament.mode"
         [rounds]="tournament.rounds"
         [participants]="participants"
       ></app-bracket>
@@ -45,6 +46,7 @@
       <app-swiss
         *ngIf="tournament.mode === tournamentMode.Swiss"
         [readonly]="isReadOnly"
+        [mode]="tournament.mode"
         [rounds]="tournament.rounds"
         [participants]="participants"
       ></app-swiss>

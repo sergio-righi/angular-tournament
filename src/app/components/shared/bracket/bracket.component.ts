@@ -36,15 +36,6 @@ export class BracketComponent extends BaseTournamentComponent {
     return game.tiebreaker ? `${game[participant]} (${game.tiebreaker[participant]})` : `${game[participant]}`;
   }
 
-  getRoundName(matches: Match[]): string {
-    return {
-      8: this.locale.t.tournament.knockout.round_of_16,
-      4: this.locale.t.tournament.knockout.round_of_8,
-      2: this.locale.t.tournament.knockout.round_of_4,
-      1: this.locale.t.tournament.knockout.round_of_2
-    }[matches.length] ?? "";
-  }
-
   bracket(len: number) {
     return [...Array(Math.round(len / 2)).keys()];
   }
@@ -110,7 +101,7 @@ export class BracketComponent extends BaseTournamentComponent {
 
   override saveGames(): void {
     super.saveGames((currentMatch: Match) => {
-      this.advance(this.selectedRound, this.selectedMatch, currentMatch.won, currentMatch.lost)
+      this.advance(this.selectedRound, this.selectedMatch, currentMatch.won, currentMatch.lost);
     });
   }
 }
