@@ -14,6 +14,7 @@ import { Round } from 'app/models/round.model';
 })
 export class SwissComponent extends BaseTournamentComponent {
   currentRound: number = 0;
+  isGameModalVisible: boolean = false;
   isOverviewModalVisible: boolean = false; // Show the modal when managing games
   standings: Standings[] = [];
   controller!: SwissTournament;
@@ -79,5 +80,20 @@ export class SwissComponent extends BaseTournamentComponent {
 
   closeOverviewModal(): void {
     this.isOverviewModalVisible = false;
+  }
+
+  override openGameModal(round: number, match: number): void {
+    super.openGameModal(round, match);
+    this.isGameModalVisible = true;
+  }
+
+  override closeGameModal(): void {
+    super.closeGameModal();
+    this.isGameModalVisible = false;
+  }
+
+  override saveGames(callback?: Function | undefined): void {
+    super.saveGames(callback);
+    this.isGameModalVisible = false;
   }
 }

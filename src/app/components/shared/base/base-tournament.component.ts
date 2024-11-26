@@ -14,7 +14,6 @@ export abstract class BaseTournamentComponent implements OnInit {
   @Input() rounds: Round[] = [];
   @Input() participants: { [id: string]: string } = {};
 
-  isModalVisible: boolean = false;
   selectedRound: number = -1;
   selectedMatch: number = -1;
   games: Game[] = [];
@@ -27,18 +26,6 @@ export abstract class BaseTournamentComponent implements OnInit {
     return this.rounds.length;
   }
 
-  get gameHeader(): string {
-    if (this.selectedRound >= 0 && this.selectedMatch >= 0) {
-      const match = this.rounds[this.selectedRound].matches[this.selectedMatch];
-      return `${this.getParticipant(match.p1)} vs ${this.getParticipant(match.p2)}`;
-    }
-    return '';
-  }
-
-  get hasTiebreaker(): boolean {
-    return this.games.length > 0 && this.games[this.games.length - 1].tiebreaker !== undefined;
-  }
-
   getParticipant(id: string): string {
     return this.participants[id] || "TBD";
   }
@@ -49,28 +36,15 @@ export abstract class BaseTournamentComponent implements OnInit {
       : `${game.p1} x ${game.p2}`;
   }
 
-  openManageGamesModal(round: number, match: number): void {
+  openGameModal(round: number, match: number): void {
     this.selectedRound = round;
     this.selectedMatch = match;
     this.games = [...this.rounds[this.selectedRound].matches[match].games];
-    this.isModalVisible = true;
   }
 
-  closeManageGamesModal(): void {
+  closeGameModal(): void {
     this.selectedRound = -1;
     this.selectedMatch = -1;
-    this.isModalVisible = false;
-  }
-
-  toggleTiebreaker(index: number): void {
-    const game = this.games[index];
-    if (game.tiebreaker) {
-      // Remove tiebreaker
-      delete game.tiebreaker;
-    } else {
-      // Add tiebreaker with default values
-      game.tiebreaker = { p1: 0, p2: 0 };
-    }
   }
 
   addGame(): void {
@@ -145,6 +119,6 @@ export abstract class BaseTournamentComponent implements OnInit {
       callback && callback(currentMatch);
     }
 
-    this.closeManageGamesModal();
+    this.closeGameModal();
   }
 }

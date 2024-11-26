@@ -10,6 +10,7 @@ import { BaseTournamentComponent } from 'app/components/shared/base';
   styleUrls: ['./bracket.component.scss']
 })
 export class BracketComponent extends BaseTournamentComponent {
+  isGameModalVisible: boolean = false;
   isOverviewModalVisible: boolean = false; // Show the modal when managing games
 
   constructor(public override locale: LocaleService) {
@@ -97,6 +98,16 @@ export class BracketComponent extends BaseTournamentComponent {
 
       this.cascade(newRound, newMatch);
     }
+  }
+
+  override openGameModal(round: number, match: number): void {
+    super.openGameModal(round, match);
+    this.isGameModalVisible = true;
+  }
+
+  override closeGameModal(): void {
+    super.closeGameModal();
+    this.isGameModalVisible = false;
   }
 
   override saveGames(): void {

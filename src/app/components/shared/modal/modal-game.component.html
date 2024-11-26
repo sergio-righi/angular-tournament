@@ -1,5 +1,9 @@
 <!-- begin main content -->
-<app-modal [header]="gameHeader" [show]="isModalVisible" (close)="closeModal()">
+<app-modal
+  [header]="gameHeader"
+  [show]="isGameModalVisible"
+  (close)="closeModal()"
+>
   <div modal-body>
     <ul class="list-group">
       <li *ngFor="let game of games; let i = index" class="list-group-item">
@@ -37,7 +41,7 @@
                   game.tiebreaker ? locale.t.action.hide : locale.t.action.show
                 }}
               </button>
-              <button class="btn btn-danger ms-2" (click)="removeGame(i)">
+              <button class="btn btn-danger ms-2" (click)="remove(i)">
                 {{ locale.t.action.delete }}
               </button>
             </div>
@@ -75,12 +79,12 @@
     <button
       *ngIf="hasAdd"
       class="btn btn-secondary btn-sm"
-      (click)="addGame()"
+      (click)="add()"
       [disabled]="hasTiebreaker"
     >
       {{ locale.t.action.add }}
     </button>
-    <button class="btn btn-primary btn-sm ms-2" (click)="saveGames()">
+    <button class="btn btn-primary btn-sm ms-2" (click)="save()">
       {{ locale.t.action.save }}
     </button>
   </div>

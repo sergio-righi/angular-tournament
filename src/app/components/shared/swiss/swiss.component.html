@@ -9,7 +9,7 @@
             class="match"
             [class.c-pointer]="!readonly"
             [class.pointer-events-none]="readonly"
-            (click)="openManageGamesModal(i, j)"
+            (click)="openGameModal(i, j)"
             *ngFor="let match of round.matches; let j = index"
           >
             <div class="wrapper">
@@ -67,10 +67,13 @@
   [selectedRound]="selectedRound"
   [selectedMatch]="selectedMatch"
   [games]="games"
-  [isModalVisible]="isModalVisible"
+  [isGameModalVisible]="isGameModalVisible"
   [participants]="participants"
   [rounds]="rounds"
   [mode]="mode"
-  (close)="closeManageGamesModal()"
+  (onAdd)="addGame()"
+  (onRemove)="removeGame($event)"
+  (onSave)="saveGames()"
+  (onClose)="closeGameModal()"
 ></app-manage-game-modal>
 <!-- end manage modal -->
