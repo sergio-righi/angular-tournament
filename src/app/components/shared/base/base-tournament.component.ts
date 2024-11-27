@@ -83,7 +83,7 @@ export abstract class BaseTournamentComponent implements OnInit {
       const p2Score = currentMatch.games.reduce((sum, game) => sum + game.p2, 0);
 
       const lastMatch = currentMatch.games[currentMatch.games.length - 1];
-      if (lastMatch.tiebreaker) {
+      if (lastMatch && lastMatch.tiebreaker) {
         p1Tiebreaker = lastMatch.tiebreaker.p1;
         p2Tiebreaker = lastMatch.tiebreaker.p2;
       }

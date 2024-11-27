@@ -21,6 +21,29 @@ export class BracketComponent extends BaseTournamentComponent {
     return this.rounds[0].matches.length === 4;
   }
 
+  getPreviousParticipant(round: number, match: number, player: "p1" | "p2"): string {
+    const currentRound = this.rounds[round];
+    const currentMatch = currentRound.matches[match];
+    const isSet = currentMatch.p1 !== "" && currentMatch.p2 !== "";
+    if (!isSet) {
+      const previousIndex = player === "p1" ? match * 2 : match * 2 + 1;
+      const previousMatch = this.rounds[currentRound.index - 1].matches[previousIndex];
+      if (previousMatch.won === "" && previousMatch.p1 !== "" && previousMatch.p2 !== "") {
+        return `${super.getParticipant(previousMatch.p1)} / ${super.getParticipant(previousMatch.p2)}`;
+      }
+    }
+    return super.getParticipant(currentMatch[player]);
+  }
+
+  isReadonly(round: number, match: number): boolean {
+    if (this.readonly) return true;
+    const item = this.rounds[round].matches[match];
+    if (item) {
+      return item.p1 === "" || item.p2 === "";
+    }
+    return false;
+  }
+
   openOverviewModal(): void {
     this.isOverviewModalVisible = true;
   }

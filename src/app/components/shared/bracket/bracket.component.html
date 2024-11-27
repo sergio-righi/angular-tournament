@@ -18,13 +18,13 @@
             <div class="participants">
               <div
                 class="participant"
-                [class.c-pointer]="!readonly"
-                [class.pointer-events-none]="readonly"
+                [class.c-pointer]="!isReadonly(round.index, j)"
+                [class.pointer-events-none]="isReadonly(round.index, j)"
                 [class.won]="hasWon(round.matches[j], round.matches[j].p1)"
                 (click)="openGameModal(round.index, j)"
               >
                 <span>
-                  {{ getParticipant(round.matches[j].p1) }}
+                  {{ getPreviousParticipant(round.index, j, "p1") }}
                 </span>
                 <div class="games">
                   <span
@@ -37,13 +37,13 @@
               </div>
               <div
                 class="participant"
-                [class.c-pointer]="!readonly"
-                [class.pointer-events-none]="readonly"
+                [class.c-pointer]="!isReadonly(round.index, j)"
+                [class.pointer-events-none]="isReadonly(round.index, j)"
                 [class.won]="hasWon(round.matches[j], round.matches[j].p2)"
                 (click)="openGameModal(round.index, j)"
               >
                 <span>
-                  {{ getParticipant(round.matches[j].p2) }}
+                  {{ getPreviousParticipant(round.index, j, "p2") }}
                 </span>
                 <div class="games">
                   <span
