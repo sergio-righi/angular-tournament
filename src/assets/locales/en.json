@@ -84,7 +84,6 @@
   },
   "tournament": {
     "completed": "Completed Tournaments",
-    "create": "Create new Tournament",
     "manage": "Manage Tournament",
     "ongoing": "Ongoing Tournaments",
     "knockout": {

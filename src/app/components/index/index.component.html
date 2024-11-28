@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-12">
       <!-- begin header -->
-      <div class="d-flex flex-wrap mt-2">
-        <h3 class="me-auto">
+      <div class="d-flex flex-wrap align-items-center mt-2">
+        <h4 class="me-auto">
           {{
             completed
               ? locale.t.tournament.completed
               : locale.t.tournament.ongoing
           }}
-        </h3>
+        </h4>
         <div class="d-inline-flex align-items-center">
           <div class="form-check">
             <input
@@ -28,7 +28,7 @@
             [routerLink]="['/tournament', 'add']"
             class="btn btn-primary btn-sm"
           >
-            {{ locale.t.tournament.create }}
+            {{ locale.t.action.create }}
           </a>
         </div>
       </div>
